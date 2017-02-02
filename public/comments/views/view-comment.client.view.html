@@ -1,0 +1,15 @@
+﻿<!-- La view comentario -->
+<section data-ng-controller="CommentsController" data-ng-init="findOne()">
+    <h1 data-ng-bind="comment.titule"></h1>
+    <!-- Mostrar los botones de edición para artículo creado -->
+    <div >
+        <a href="/#!/comments/{{comment._id}}/edit">editar</a>
+        <a href="#" data-ng-click="delete();">borrar</a>
+    </div>
+    <h5 data-ng-bind ="comment.text"></h5>
+    <h5 data-ng-bind ="comment.customerRate"></h5>
+    <h5 data-ng-bind ="comment.palace._id"></h5>
+    <h5 data-ng-bind ="comment.author._id"></h5>
+
+    <p data-ng-bind="comment.date"></p>
+</section>

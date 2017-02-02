@@ -1,0 +1,19 @@
+﻿<!-- La view palacio -->
+<section data-ng-controller="PalacesController" data-ng-init="findOne()">
+    <h1 data-ng-bind="palace.name"></h1>
+    <!-- Mostrar los botones de edición para artículo creado -->
+    <div >
+        <a href="/#!/palaces/{{palace._id}}/edit">editar</a>
+        <a href="#" data-ng-click="delete();">borrar</a>
+    </div>
+    <h5 data-ng-bind ="palace.coord.lat"></h5>
+    <h5 data-ng-bind ="palace.coord.lon"></h5>
+    <h5 data-ng-bind ="palace.town"></h5>
+    <h5 data-ng-bind ="palace.country"></h5>
+
+    <p data-ng-bind="palace.resena"></p>
+    <div >
+        <a href="/#!/comments/create" data-ng-click="newComment(palace._id);">Nuevo Comentario</a>
+    </div>
+
+</section>

@@ -1,0 +1,47 @@
+﻿<!-- La view editar palacio -->
+<section data-ng-controller="PalacesController" data-ng-init="findOne()">
+	<h1>Editar Palacio</h1>
+	<!-- Formulario editar palacio -->
+	<form data-ng-submit="update()" novalidate>
+		<div>
+			<label for="name">Nombre</label>
+			<div>
+				<input type="text" data-ng-model="palace.name" id="name" placeholder="Nombre" required>
+			</div>
+		</div>
+		<div>
+			<label for="coord">Coordenadas</label>
+			<div>
+				<input type="number" data-ng-model="palace.coord.lat" id="lat" placeholder="Latitud" required>
+			</div>
+			<div>
+				<input type="number" data-ng-model="palace.coord.lon" id="lon" placeholder="Longitud" required>
+			</div>
+		</div>
+		<div>
+			<label for="town">Ciudad</label>
+			<div>
+				<input type="text" data-ng-model="palace.town" id="town" placeholder="Ciudad" required disabled>
+			</div>
+		</div>
+		<div>
+			<label for="country">Pais</label>
+			<div>
+				<input type="text" data-ng-model="palace.country" id="country" placeholder="Pais" required disabled>
+			</div>
+		</div>
+		<div>
+			<label for="resena">Reseña</label>
+			<div>
+				<textarea data-ng-model="palace.resena" id="resena" cols="30" rows="10" placeholder="Reseña"></textarea>
+			</div>
+		</div>
+		<div>
+			<input type="submit" value="Actualizar">
+		</div>
+		<!-- El elemento mensaje error -->
+		<div data-ng-show="error">
+			<strong data-ng-bind="error"></strong>
+		</div>
+	</form>
+</section>

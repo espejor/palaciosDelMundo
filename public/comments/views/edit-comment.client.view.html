@@ -1,0 +1,31 @@
+﻿<!-- La view editar comentario -->
+<section data-ng-controller="CommentsController" data-ng-init="findOne()">
+	<h1>Editar Comentario</h1>
+	<!-- Formulario editar comentario -->
+	<form data-ng-submit="update()" novalidate>
+		<div>
+			<label for="titule">Título</label>
+			<div>
+				<input type="text" data-ng-model="comment.titule" id="titule" placeholder="Título" required>
+			</div>
+		</div>
+		<div>
+			<label for="rate">Valoración</label>
+			<div>
+				<input type="number" data-ng-model="comment.customerRate" id="rate" required>
+			</div>
+		</div>
+		<div>
+			<label for="text">Comentario</label>
+			<div>
+				<textarea data-ng-model="comment.text" id="text" cols="100" rows="10" placeholder="Aquí su comentario"></textarea>
+			</div>
+		</div>		<div>
+			<input type="submit" value="Actualizar">
+		</div>
+		<!-- El elemento mensaje error -->
+		<div data-ng-show="error">
+			<strong data-ng-bind="error"></strong>
+		</div>
+	</form>
+</section>

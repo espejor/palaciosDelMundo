@@ -1,0 +1,28 @@
+{
+  "name": "palaces",
+  "version": "0.0.1",
+  "description": "palaces",
+  "main": "server.js",
+  "author": {
+    "name": "José",
+    "email": ""
+  },
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "compression": "~1.6.2",
+    "connect-flash": "~0.1.1",
+    "connect-multiparty": "^2.0.0",
+    "ejs": "~2.5.5",
+    "express": "^4.8.8",
+    "express-formidable": "~1.0.0",
+    "express-session": "~1.14.2",
+    "formidable": "~1.1.1",
+    "method-override": "~2.3.7",
+    "mongoose": "~4.7.7",
+    "morgan": "~1.7.0",
+    "passport": "~0.3.2",
+    "passport-google-oauth": "~1.0.0",
+    "passport-google-oauth2": "~0.1.6",
+    "passport-local": "~1.0.0"
+  }
+}

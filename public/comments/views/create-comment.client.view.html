@@ -1,0 +1,32 @@
+﻿<!-- Crear la View Palaces -->
+<section data-ng-controller="CommentsController">
+	<h1>Nuevo Comentario</h1>
+	<!-- El formulario nuevo comentario -->
+	<form data-ng-submit="create()" novalidate>
+		<div>
+			<label for="titule">Título</label>
+			<div>
+				<input type="text" data-ng-model="titule" id="titule" placeholder="Título" required>
+			</div>
+		</div>
+		<div>
+			<label for="rate">Valoración</label>
+			<div>
+				<input type="number" data-ng-model="customerRate" id="rate" required>
+			</div>
+		</div>
+		<div>
+			<label for="text">Comentario</label>
+			<div>
+				<textarea data-ng-model="text" id="text" cols="100" rows="10" placeholder="Aquí su comentario"></textarea>
+			</div>
+		</div>
+		<div>
+			<input type="submit">
+		</div>
+		<!-- El elemento mensaje de error -->
+		<div data-ng-show="error">
+			<strong data-ng-bind="error"></strong>
+		</div>
+	</form>
+</section>

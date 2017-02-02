@@ -1,0 +1,14 @@
+<section data-ng-controller="MainController">
+  <div data-ng-show="!authentication.user">
+    <a href="/signup">Crear Cuenta</a>
+    <a href="/signin">Identificarse</a>
+  </div>
+  <div data-ng-show="authentication.user">
+    <h1>Hola <span data-ng-bind="authentication.user.fullName"></span></h1>
+    <a href="/signout">Cerrar Sesión</a>
+    <ul>
+      <li><a href="/#!/palaces">Listar Palacios</a></li>
+      <li><a href="/#!/palaces/create">Crear Palacios</a></li>
+    </ul>
+  </div>
+</section>

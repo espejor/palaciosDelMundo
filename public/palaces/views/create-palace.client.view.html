@@ -1,0 +1,55 @@
+﻿<!-- Crear la View Palaces -->
+<section data-ng-controller="PalacesController">
+	<h1>Nuevo Palacio</h1>
+	<!-- El formulario nuevo palacio -->
+	<form data-ng-submit="create()" method="post" enctype="multipart/form-data" novalidate>
+        <fieldset>
+		    <div>
+			    <label for="name">Nombre</label>
+			    <div>
+				    <input type="text" data-ng-model="name" id="name" placeholder="Nombre" required>
+			    </div>
+		    </div>
+		    <div>
+			    <label for="coord">Coordenadas</label>
+			    <div>
+				    <input type="number" data-ng-model="lat" id="lat" placeholder="Latitud" required>
+			    </div>
+			    <div>
+				    <input type="number" data-ng-model="lon" id="lon" placeholder="Longitud" required>
+			    </div>
+		    </div>
+		    <div>
+			    <label for="town">Ciudad</label>
+			    <div>
+				    <input type="text" data-ng-model="town" id="town" placeholder="Ciudad" required>
+			    </div>
+		    </div>
+		    <div>
+			    <label for="country">Pais</label>
+			    <div>
+				    <input type="text" data-ng-model="country" id="country" placeholder="Pais" required>
+			    </div>
+		    </div>
+		    <div>
+			    <label for="resena">Reseña</label>
+			    <div>
+				    <textarea data-ng-model="resena" id="resena" cols="30" rows="10" placeholder="Reseña"></textarea>
+			    </div>
+		    </div>
+            <div>
+                <label for="imgPalace">Cargar imágenes:</label>
+                <input type="file" id =" imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" />
+
+            </div>
+
+		    <div>
+			    <input type="submit">
+		    </div>
+		    <!-- El elemento mensaje de error -->
+		    <div data-ng-show="error">
+			    <strong data-ng-bind="error"></strong>
+		    </div>
+        </fieldset>
+	</form>
+</section>
