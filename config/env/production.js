@@ -4,6 +4,6 @@
 	google: {
 		clientID: '1017339095363-mj7lectrn5bqhodvo5dtfk5eb4jfhjhh.apps.googleusercontent.com',
 		clientSecret: 'XOqZCbZUsrnvdUuAuntJBKkB',
-		callbackURL: 'http://localhost:3000/oauth/google/callback'
+		callbackURL: 'https://palacesoftheworld.herokuapp.com/oauth/google/callback'
 	}
 };
