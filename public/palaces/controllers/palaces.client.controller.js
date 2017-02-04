@@ -10,6 +10,8 @@ angular.module('palaces').controller('PalacesController', ['$scope', '$routePara
 		// Crear un nuevo método controller para crear nuevos palaces
 		$scope.create = function () {
 			if ($scope.files && $scope.files.length) {
+				var comments = [];
+				for (var i in $scope.files) comments[i] = $scope.files[i].comment;
 				Upload.upload({
 					url: '/api/palaces', 
 					data : {
@@ -20,7 +22,8 @@ angular.module('palaces').controller('PalacesController', ['$scope', '$routePara
 							country: this.country,
 							type: 'P',
 							rate: 0,
-							resena: this.resena
+							resena: this.resena,
+							comments: comments
 						}, 
 						files: $scope.files
 					}
@@ -87,6 +90,10 @@ angular.module('palaces').controller('PalacesController', ['$scope', '$routePara
 		$scope.newComment = function (palace_id) {
 			PalaceID._id = palace_id;
 //			$location.path('comments/create');
+		}
+
+		$scope.cancel = function(){
+			$scope.files = [];
 		}
 
 	}

@@ -1,10 +1,11 @@
-<section data-ng-controller="MainController">
-  <div data-ng-show="!authentication.user">
+
+
+  <!--<div data-ng-show="!authentication.user">
     <a href="/signup">Crear Cuenta</a>
     <a href="/signin">Identificarse</a>
   </div>
   <div data-ng-show="authentication.user">
-    <h1>Hola <span data-ng-bind="authentication.user.fullName"></span></h1>
+    <h6>Hola <span data-ng-bind="authentication.user.fullName"></span></h6>
     <a href="/signout">Cerrar Sesión</a>
     <ul>
       <li><a href="/#!/palaces">Listar Palacios</a></li>
@@ -12,3 +13,30 @@
     </ul>
   </div>
 </section>
+
+        <div ng-controller = "indexCtrl as vm">
+            <nav class="navbar navbar-inverse menu">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="titulePage navbar-brand" href="#/">Palaces of the world</a>
+                </div>
+                <ul class="nav navbar-nav">
+                  <li><a href="#/">Home</a></li>
+                  <li><a href="#/">Articles</a></li>
+                  <li><a ng-href="#/about">Galery</a></li>
+                  <li><a href="#/">My Travel</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                  <div class="input-group">
+
+                    <div class="input-group-btn">
+                      <a ng-href = "#/search" class="btn btn-default" type="submit" ng-click = 'vm.buscar()'>
+                        <i class="glyphicon glyphicon-search"></i>
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </nav>
+        </div>-->
+

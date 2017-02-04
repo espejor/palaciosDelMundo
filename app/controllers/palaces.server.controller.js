@@ -28,8 +28,10 @@ exports.create = function (req, res) {
 	var files = req.files.files;
 	var country = req.body.fields.country;
 	var town = req.body.fields.town;
+	var comments = req.body.fields.comments;
 
 	// Crear un nuevo objeto palace
+	delete req.body.fields.comments;
 	var palace = new Palace(req.body.fields);
 	
 	// Creamos el directorio donde se almacenará la imagen
@@ -49,6 +51,7 @@ exports.create = function (req, res) {
 		var picture = new Picture();
 		picture.palace = palace._id;
 		picture.url = fileName;
+		picture.comment = comments[i];
 		picture.save(function (err) {
 			if (err) {
 				// Si ocurre algún error enviar el mensaje de error

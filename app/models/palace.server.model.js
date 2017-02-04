@@ -41,7 +41,8 @@ var PictureSchema = new SchemaPicture(
 			type: String,
 			default: '',
 			trim: true
-		}
+		},
+		comment: String
 	}
 );
 

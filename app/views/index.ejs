@@ -2,17 +2,70 @@
 <html>
   <head>
     <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/main.css">
   </head>
-  <body>
 
-	  <section ng-view></section>
-	  <script type = "text/javascript">
-		window.user = <%- user || 'null' %>;
-	  </script>
 
-		<script type = "text/javascript" src = "/lib/angular/angular.js"></script>
-		<script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>	  
-		<script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>	
+  <body  >
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+      <section data-ng-controller="MainController">
+        <nav class="navbar navbar-inverse menu">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="titulePage navbar-brand" href="#/">Palaces of the world</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/">Articles</a></li>
+            <li><a href="#/about">Galery</a></li>
+            <li><a href="#/">My Travel</a></li>
+        </ul>
+        <form class="navbar-form navbar-right">
+            <div class="input-group">
+              <div data-ng-show="!authentication.user">
+                
+                    <a class="label label-primary" href="/signup">Crear Cuenta</a>
+                    <a class="label label-primary" href="/signin">Identificarse</a>
+                
+              </div>
+              <div data-ng-show="authentication.user">
+                <span class="label label-success" data-ng-bind="authentication.user.fullName"></span>
+                <a class="label label-danger" href="/signout">Cerrar Sesión</a>
+              </div>
+            <div class="input-group-btn">
+                <a ng-href = "/#!/palaces" class="btn btn-default" type="submit" ng-click = 'vm.buscar()'>
+                <i class="glyphicon glyphicon-search"></i>
+                </a>
+            </div>
+            </div>
+        </form>
+        </div>
+    </nav>
+    </section>
+
+
+	  <div ng-view></div>
+
+	    <script type = "text/javascript">	window.user = <%- user || 'null' %>; </script>
+
+		<script type = "text/javascript" src="/lib/jquery/dist/jquery.js"></script>
+        <script type = "text/javascript" src="/lib/angular/angular.js"></script>
+		<script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="/lib/angular-cookies/angular-cookies.js"></script>
+        <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+        <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>	  
+        <script type="text/javascript" src="/lib/angular-sanitize/angular-sanitize.js"></script>
+        <script type="text/javascript" src="/lib/angular-touch/angular-touch.js"></script>
+        <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	    <script type="text/javascript" src="/lib/ngmap/build/scripts/ng-map.js"></script>
+
 		<script type="text/javascript" src="/lib/ng-file-upload/ng-file-upload.min.js"></script>  
 
 		<script type="text/javascript" src="/palaces/palaces.client.module.js"></script>
@@ -33,6 +86,10 @@
 		<script type="text/javascript" src="/main/main.client.module.js"></script>
 		<script type="text/javascript" src="/main/controllers/main.client.controller.js"></script>
 		<script type="text/javascript" src="/main/config/main.client.routes.js"></script>
+
+		<script type="text/javascript" src="/carousel/carousel.client.module.js"></script>
+		<script type="text/javascript" src="/carousel/controllers/carousel.client.controller.js"></script>
+		<script type="text/javascript" src="/carousel/config/carousel.client.routes.js"></script>
 
 		<script type = "text/javascript" src = "/users/users.client.module.js"></script>
 		<script type = "text/javascript" src = "/users/services/authentication.client.service.js"></script>

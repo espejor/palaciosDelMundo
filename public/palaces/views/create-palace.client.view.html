@@ -39,12 +39,18 @@
 		    </div>
             <div>
                 <label for="imgPalace">Cargar imágenes:</label>
-                <input type="file" id =" imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" />
+                <input type="file" id ="imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true"/>
 
+            </div>
+            <div ng-repeat ="picture in files">
+                <img ngf-src="picture" ngf-background="file" height="80"/>
+                <textarea data-ng-model="picture.comment"  cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
             </div>
 
 		    <div>
 			    <input type="submit">
+
+			    <a href="#!/palaces/create" type="button" id="cancelBtn" data-ng-click="cancel()">Borrar</a>
 		    </div>
 		    <!-- El elemento mensaje de error -->
 		    <div data-ng-show="error">

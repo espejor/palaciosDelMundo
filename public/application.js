@@ -6,6 +6,7 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [
 	'palaces', 
 	'users', 
 	'main', 
+	'carousel',
 	'comments', 
 	'ngFileUpload'
 ]);

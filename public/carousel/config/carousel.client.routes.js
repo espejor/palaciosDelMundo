@@ -1,4 +1,4 @@
-angular.module('main')
+angular.module('carousel')
 .config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
