@@ -27,3 +27,5 @@ angular.module('carousel')
 		}
 	];
 });
+
+

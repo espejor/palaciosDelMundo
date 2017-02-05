@@ -1,29 +1,49 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-  <!-- Usa la propiedad 'title' para renderizar un título de página  -->
-  <title><%= title %></title>
-</head>
-<body>
-    <!-- Mostrar mensajes Flash  -->
-  <% for(var i in messages) { %>
-     <div class="flash"><%= messages[i] %></div>
-  <% } %>
+﻿
 
-  <!-- Renderizar el formulario signin -->
-  <form action="/signin" method="post">
-    <div>
-      <label>Usuario:</label>
-      <input type="text" name="username" />
+
+<!DOCTYPE html>
+<html>
+    <title>Palaces of the World - Log in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="/css/main.css">
+<body>
+
+<div  id="id01" class="w3-modal" style="display:block">
+
+
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <a href="/" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
+        <img src="icons/manavatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+
+      <form class="w3-container" action="/signin" method="post">
+        <div class="w3-section">
+          <label><b>Username</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+          <label><b>Password</b></label>
+          <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
+          <button class="w3-btn-block w3-green w3-section w3-padding" type="submit">Login</button>
+         <% for(var i in messages) { %>
+            <div class="flash w3-panel w3-red"><%= messages[i] %></div>
+            <a class="w3-btn-block w3-blue w3-left-align" href="/signup">Registrarse</a><br />
+         <% } %>       
+          <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+        </div>
+      </form>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <a href="/" type="button" class="w3-btn w3-red">Cancel</a>
+        <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+      </div>
+        <a href="/oauth/google"><img class="iconSignin"src="icons/google+icon.png" title="Identificarse usando Google +"/></a>
     </div>
-    <div>
-      <label>Contraseña:</label>
-      <input type="password" name="password" />
-    </div>
-    <div>
-      <input type="submit" value="Identificarse" />
-    </div>
-  </form>
-   <a href="/oauth/google">Identificarse usando Google</a>
+
+</div>
+        <script type = "text/javascript" src="/lib/jquery/dist/jquery.js"></script>
+        <script type = "text/javascript" src="/lib/angular/angular.js"></script>
+
 </body>
 </html>

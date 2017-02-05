@@ -13,7 +13,7 @@ var getErrorMessage = function (err) {
 	// Si un error interno de MongoDB ocurre obtener el mensaje de error
 	if (err.code) {
 		switch (err.code) {
-      // Si un eror de index único ocurre configurar el mensaje de error
+      // Si un error de index único ocurre configurar el mensaje de error
 			case 11000:
 			case 11001:
 				message = 'Usuario ya existe';

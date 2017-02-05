@@ -5,38 +5,59 @@
   <title>
     <%=title %>
   </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <!-- Mostrar mensajes flash  -->
-  <% for(var i in messages) { %>
-    <div class="flash"><%= messages[i] %></div>
-  <% } %>
-  <!-- Renderizar el formulario signup  -->
-  <form action="/signup" method="post">
-    <div>
-      <label>Nombre:</label>
-      <input type="text" name="firstName" />
-    </div>
-    <div>
-      <label>Apellido:</label>
-      <input type="text" name="lastName" />
-    </div>
-    <div>
-      <label>Email:</label>
-      <input type="text" name="email" />
-    </div>
-    <div>
-      <label>Nombre Usuario:</label>
-      <input type="text" name="username" />
-    </div>
-    <div>
-      <label>Contraseña:</label>
-      <input type="password" name="password" />
-    </div>
-    <div>
-      <input type="submit" value="Crear Cuenta" />
-    </div>
-  </form>
-  <a href="/oauth/google">Registrarse usando Google</a>
+
+    <div  id="id01" class="w3-modal" style="display:block">
+
+
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <a href="/" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
+        <img src="icons/manavatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+
+          <!-- Mostrar mensajes flash  -->
+          <% for(var i in messages) { %>
+            <div class="flash"><%= messages[i] %></div>
+          <% } %>
+          <!-- Renderizar el formulario signup  -->
+          <form class="w3-container" action="/signup" method="post">
+            <div class="w3-section">
+              <label><b>Nombre:</b></label>
+              <input class="w3-input w3-border w3-margin-bottom" type="text" name="firstName" required placeholder="Introduzca Nombre" />
+            </div>
+            <div>
+              <label>Apellido:</label>
+              <input class="w3-input w3-border w3-margin-bottom" type="text" required placeholder="Introduzca Apellido" name="lastName" />
+            </div>
+            <div>
+              <label>Email:</label>
+              <input class="w3-input w3-border w3-margin-bottom" placeholder="Introduzca e-mail" type="email" name="email" required/>
+            </div>
+            <div>
+              <label>Nombre Usuario:</label>
+              <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" required name="username" />
+            </div>
+            <div>
+              <label>Contraseña:</label>
+              <input class="w3-input w3-border" type="password" placeholder="Enter Password" required name="password" />
+            </div>
+            <div>
+              <input class="w3-btn-block w3-green w3-section w3-padding"  type="submit" value="Crear Cuenta" />
+            </div>
+
+                <a href="/oauth/google"><img class="iconSignin"src="icons/google+icon.png" title="Registrarse usando Google +"/></a>
+          </form>            
+
+    </div>          
+
+
+        </div>
+
 </body>
 </html>
