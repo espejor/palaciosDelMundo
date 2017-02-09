@@ -8,7 +8,9 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [
 	'main', 
 	'carousel',
 	'comments', 
+	'ui.bootstrap',
 	'angularModalService',
+	'ngMap',
 	'ngFileUpload'
 ]);
 

@@ -1,61 +1,65 @@
 ﻿<!-- Crear la View Palaces -->
-<section data-ng-controller="PalacesController">
-	<h1>Nuevo Palacio</h1>
-	<!-- El formulario nuevo palacio -->
-	<form data-ng-submit="create()" method="post" enctype="multipart/form-data" novalidate>
-        <fieldset>
-		    <div>
-			    <label for="name">Nombre</label>
-			    <div>
-				    <input type="text" data-ng-model="name" id="name" placeholder="Nombre" required>
-			    </div>
-		    </div>
-		    <div>
-			    <label for="coord">Coordenadas</label>
-			    <div>
-				    <input type="number" data-ng-model="lat" id="lat" placeholder="Latitud" required>
-			    </div>
-			    <div>
-				    <input type="number" data-ng-model="lon" id="lon" placeholder="Longitud" required>
-			    </div>
-		    </div>
-		    <div>
-			    <label for="town">Ciudad</label>
-			    <div>
-				    <input type="text" data-ng-model="town" id="town" placeholder="Ciudad" required>
-			    </div>
-		    </div>
-		    <div>
-			    <label for="country">Pais</label>
-			    <div>
-				    <input type="text" data-ng-model="country" id="country" placeholder="Pais" required>
-			    </div>
-		    </div>
-		    <div>
-			    <label for="resena">Reseña</label>
-			    <div>
-				    <textarea data-ng-model="resena" id="resena" cols="30" rows="10" placeholder="Reseña"></textarea>
-			    </div>
-		    </div>
-            <div>
-                <label for="imgPalace">Cargar imágenes:</label>
-                <input type="file" id ="imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true"/>
+<section data-ng-controller="PalacesController" class="w3-modal" id ="createPalaceModal">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-create-palace">
+        <div class="w3-center">          
+            <h2  class="w3-center modal-title " ><strong>Nuevo Palacio</strong></h2>
+            <a href="#!/palaces" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
+       </div>
 
-            </div>
-            <div ng-repeat ="picture in files">
-                <img ngf-src="picture" ngf-background="file" height="80"/>
-                <textarea data-ng-model="picture.comment"  cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
-            </div>
 
-		    <div>
-			    <input type="submit">
+        <!-- El formulario nuevo palacio -->
+        <form class="w3-container" data-ng-submit="create()" method="post" enctype="multipart/form-data" novalidate>
+            <div class="w3-section">
+                <div class="col-sm-6">
+                    <div>
+                        <label for="name">Nombre</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="name" id="name" placeholder="Nombre" required>
+                    </div>
+                    <div>
+                        <label for="coord">Coordenadas</label>
+                        <div class="input-coord">
+                            <input class="w3-input w3-border w3-margin-bottom" type="number" data-ng-model="lat" id="lat" placeholder="Latitud" required>
+                            <input class="w3-input w3-border w3-margin-bottom" type="number" data-ng-model="lng" id="lng" placeholder="Longitud" required>
+                        </div>
 
-			    <a href="#!/palaces/create" type="button" id="cancelBtn" data-ng-click="cancel()">Borrar</a>
-		    </div>
-		    <!-- El elemento mensaje de error -->
-		    <div data-ng-show="error">
-			    <strong data-ng-bind="error"></strong>
-		    </div>
-        </fieldset>
-	</form>
+                    </div>
+
+                    <div>
+                        <label for="town">Ciudad</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="town" id="town" placeholder="Ciudad" required>
+                    </div>
+                    <div>
+                        <label for="country">Pais</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="country" id="country" placeholder="Pais" required>
+                    </div>
+                    <div>
+                        <label for="resena">Reseña</label><br />
+                        <textarea data-ng-model="resena" id="resena" cols="42" rows="5" placeholder="Reseña"></textarea>
+                    </div>
+                </div>              
+                  
+                <div class="col-sm-6 imagesToUpload">
+                    <div class="fileUpload w3-btn">
+                        <label for="imgPalace">Cargar imágenes:</label>
+                        <input class="w3-btn w3-blue upload"  type="file" id="imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true" />
+                    </div>                        
+                    <a  class="w3-btn w3-red" href="#!/palaces/create" type="button" id="cancelBtn" data-ng-click="deletePictureSelection()">Borrar</a>
+
+                    <div class="item-pack-img-comment" ng-repeat="picture in files">
+                        <img class="item-img" ngf-src="picture" ngf-background="file" height="50" />
+                        <textarea class="item-comment" data-ng-model="picture.comment" cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
+                    </div>
+
+                </div>                
+                <div class="col-sm-12">
+                    <div>
+                        <input class="w3-btn w3-green ok" type="submit">
+                    </div>
+                    <!-- El elemento mensaje de error -->
+                    <div data-ng-show="error">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </div class="col-sm-12">            </div>
+        </form>
+    </div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-signin">
 </section>

@@ -1,1 +1,197 @@
-﻿Lista de Palacios
+﻿<!-- La view listar artículos -->
+
+    
+  <section  ng-controller = 'PalacesController'  data-ng-init="find()">
+
+      <div class="w3-btn-block w3-green w3-left-align" data-ng-show="authentication.user.isAdmin">
+          <a href="/#!/palaces/create">Nuevo Palacio</a>
+      </div>
+    <div class="searchBox">
+      <input type = "text" list = "buscaPalaces" class=" form-control" id ="inputSearch"
+        placeholder="¿Qué quieres ver?" ng-model = "address"/>
+      <datalist size = "4" ng-show = "p" id = "buscaPalaces" class="form-control" onselect = "addressSelected()" ng-model = "addressCustomSelected">
+        <select size = "6">
+          <option ng-repeat="p in palaces" label="{{p.town}}, ({{p.country}})" value = {{p.name}}>
+        </select>
+      </datalist>
+    </div>
+
+
+    <section>
+        <div class = "row resBusqueda">
+            <div class="col-sm-3">
+                <div id = "searchMap" class = "panel ">
+                        <div class = "google-map-container">
+                            <div map-lazy-load = "http://maps.google.com/maps/api/js">
+                                <ng-map class = "google-map-container"
+                                     zoom = "{{map.zoom}}" default-style = "false">
+                                    <marker  ng-repeat = "palace in palaces"
+                                        id="custom-marker-{{$index}}"
+                                        position="[{{palace.coord.lat}},{{palace.coord.lng}}]"
+                                        icon= "icons/palace_blue.png"
+                                        on-mouseover="showPalace(event, palace)"
+                                        on-mouseout="hideInfo(event)"
+                                        on-click = "goToPalace(event,palace)">
+                                    </marker>
+                                    <info-window id="myInfoWindow" class="infoWindow" disableAutoPan =" true">
+                                        <a ng-href = "#/onePalace" ng-click = "setIndex(selectedPalace.name)">
+                                        <div ng-non-bindable="">
+                                            <h6>{{selectedPalace.name}}</h6>
+                                            <!--<img class="imgInMap" src="{{selectedPalace.picture[0].url}}">-->
+                                        </div>
+                                        </a>
+                                    </info-window>
+                                </ng-map>
+                            </div>
+                        </div>
+                    </div>
+                <div id = "searchFilter" class = "panel">
+                    <h3>Filtrar por...</h3>
+                    <div class="panel panel-default" id="countryFilter">
+                        <div class="panel-heading">
+                            <h5><strong>Pais:</strong></h5>
+                        </div>
+                        <div class="panel-body">
+                            <select class="form-control" size="6" name="selectListCountries" ng-model="listCountriesSelected"  multiple>
+                                <option ng-repeat="option in listCountriesToSelect" ng-value="option"  ng-click ="countryChanged()">{{option}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" id="ratingFilter">
+                        <div class="panel-heading">
+                            <h5><strong>Valoración:</strong><h5>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-repeat = "val in listRate">
+                                <uib-rating class = "rating" ng-model=val max = "max" readonly ="isReadonly"></uib-rating>
+                                <div class="col-xs-3">
+                                    <span><input type="checkbox" ng-model = listRatesSelected[$index]></span>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+	            <h1>Palacios</h1>
+                <div class="row filaPalaces">
+                    <div class="col-md-4 w3-card-4" data-ng-repeat = "palace in palaces | filter:customerFilter">
+			            <a href="/#!/palaces/{{palace._id}}"><img class = "itemPalace " ng-src = "{{palace.picture[0].url}}"></a>
+                        <uib-rating class = "rating" ng-model=palace.rate max = "max" readonly ="isReadonly"></uib-rating>
+			            <div class="w3-container w3-center">
+                            <h6><a data-ng-href="#!/palaces/{{palace._id}}" data-ng-bind="palace.name"></a></h6>
+                            <p>{{palace.town}} - {{palace.country}}</p>
+			                <!-- Mostrar los botones de edición para artículo creado -->
+                            <p >
+                                <a href="/#!/palaces/{{palace._id}}/edit">editar</a>
+                                <a href="/#!/palaces" data-ng-click="delete(palace);">borrar</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+	            <!-- Si no hay artículos en la lista, sugire al usuario que cree un nuevo artículo -->
+	            <div data-ng-hide="!palaces || palaces.length">
+		            Aún no hay artículos, por qué no creas <a href="/#!/palaces/create">el primero</a>?
+	            </div>
+            </div>
+        </div>
+    </section>
+  </section>
+
+
+
+
+<!--<div ng-controller="MapCtrl as sc">
+
+  <div  ng-controller = 'PalacesController as sc' data-ng-init="find()">
+    <div class="searchBox">
+      <input type = "text" list = "buscaPalaces" class=" form-control" id ="inputSearch"
+        placeholder="¿Qué quieres ver?" ng-model = "address" ng-change = "addressChanged()"/>
+      <datalist size = "4" ng-show = "p" id = "buscaPalaces" class="form-control" onselect = "addressSelected()" ng-model = "addressCustomSelected">
+        <select size = "6">
+          <option ng-repeat="p in palaces" label="{{p.town}}, ({{p.country}})" value = {{p.name}}>
+        </select>
+      </datalist>
+    </div>
+
+<h2 ng-show = "address" class = " cabecera page-header">Resultado de búsqueda para <{{address}}></h2>
+
+    <div class = "row resBusqueda" >
+      <div class="col-sm-3">
+        <div id = "searchMap" class = "panel ">
+          <div class = "google-map-container">
+            <div map-lazy-load = "http://maps.google.com/maps/api/js">
+              <ng-map class = "google-map-container"
+                  on_bounds_changed = "onBoundsChanged()" zoom = "{{map.zoom}}" default-style = "false">
+                  <marker  ng-repeat = "palace in palaces"
+                    position="{{palace.coord}}"
+                    icon= "icons/palace_blue.png"
+                    on-mouseover="showPalace(event, palace)"
+                    on-mouseout="hideInfo(event)"
+                    on-click = "goToPalace(event,palace)">
+                  </marker>
+                  <info-window id="myInfoWindow">
+                    <a ng-href = "#/onePalace" ng-click = "setIndex(selectedPalace.name)">
+                    <div ng-non-bindable="">
+                      <h6>{{selectedPalace.name}}</h6>
+                      <img class="imgInMap" src="{{selectedPalace.picture[0].url}}">
+                    </div>
+                  </a>
+                  </info-window>
+              </ng-map>
+            </div>
+          </div>
+        </div>
+        <div id = "searchFilter" class = "panel">
+          <h3>Filtrar por...</h3>
+          <div class="panel panel-default">
+             <div class="panel-heading">
+               <h5><strong>Pais:</strong></h5>
+             </div>
+             <div class="panel-body">
+               <select class="form-control" size="6" name="selectListCountries" ng-model="listCountriesSelected"  multiple>
+                  <option ng-repeat="option in listCountriesToSelect" ng-value="option"  ng-click ="countryChanged()">{{option}}</option>
+                </select>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5><strong>Valoración:</strong><h5>
+            </div>
+            <div class="panel-body">
+              <div ng-repeat = "val in listRate">
+                <uib-rating class = "rating" ng-model=val max = "max" readonly ="isReadonly"></rating>
+                <div class="col-xs-3">
+                <span><input type="checkbox" ng-model = listRatesSelected[$index]></span></div>
+                <br/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-md-12" ng-show = "verPorPalacios" ng-repeat = "town in listTowns">
+            <h3>{{town}}</h3>
+            <div class="col-md-4 panel itemFound" ng-model = "myFilter" ng-repeat="palace in palaces | filter:customerFilter | filter:{town:town} ">
+              <a ng-href = "#/onePalace" ng-click = "setIndex(palace.name)"><img class = "itemPalace img-thumbnail" ng-src = "{{palace.picture[0].url}}"></a>
+              <uib-rating class = "rating" ng-model=palace.rate max = "max" readonly ="isReadonly"></rating>
+              <h4>{{palace.name}}</h4>
+              <p>{{palace.town}} - {{palace.country}}</p>
+            </div>
+          </div>
+          <div class="col-md-4 panel itemFound" ng-hide = "verPorPalacios"  ng-repeat="comboPalace in listPalacesForCountry" ng-click = "selectCountry(comboPalace.country)">
+            <a ng-href = "#/search" ng-click = "cambiaVista(comboPalace.country)" ><img class = "itemPalace img-thumbnail" ng-src = "{{comboPalace.picture}}"></a>
+            <div class="porPaises">
+              <h2>{{comboPalace.country}}</h2>
+              <h1>{{comboPalace.totalPalaces}} palacios</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

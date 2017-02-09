@@ -104,7 +104,9 @@ body {
 }
 
 .itemPalace{
-  width: 100%;
+    width: 100%;
+    margin-bottom: 5px;
+    height: 63%;
 }
 
 .resBusqueda{
@@ -115,6 +117,7 @@ body {
 .rating{
   font-size: large;
   color: gold;
+  margin:10px;
 }
 
 #onePalaceMap{
@@ -193,10 +196,20 @@ body {
   width: 30%;
 }
 
+h6{
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.infoWindow {
+
+}
+
 .imgInMap{
   width: 70px;
   height: 35px;
 }
+
 
 .porPaises{
   font-weight: bold;
@@ -238,7 +251,7 @@ body {
 .carousel-inner { text-align: center; }
 .carousel .item > img { display: inline-block; }
 
-  .modal-header, h4, .close {
+  .modal-header,  .close {
       background-color: #5cb85c;
       color:white !important;
       text-align: center;
@@ -251,4 +264,90 @@ body {
 .iconSignin {
     width: 80px;
     padding: 10px;
+}
+
+.w3-container > h6 {
+  font-weight: bold;
+}
+
+.w3-modal {
+    display: block;
+    padding-top:30px;
+}
+
+.w3-input {
+    background-color: lightgoldenrodyellow;
+}
+.input-coord {
+    display: inline-flex;
+    width:100%;
+}
+
+.imagesToUpload {
+        margin-top: 17px;
+}
+
+.item-pack-img-comment {
+    display: flex;
+}
+
+.item-img {
+    height: 100%;
+    width: 100px;
+    margin: 10px;
+}
+
+.item-comment {
+    width: 280px;
+    height: 85px;
+    margin: 5px;
+    font-size: 12px;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+        height: 34px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.w3-btn {
+    background-color: blue;
+}
+
+.ok {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#modal-window-signin {
+    width: 400px;
+}
+
+.modal-title {
+    margin: 10px;
+}
+
+.col-md-4 {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin: 10px;
+    width: 31%;
+    height: 364px;
+}
+
+.filaPalaces {
+    width:100%;
 }

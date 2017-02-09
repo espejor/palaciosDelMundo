@@ -65,7 +65,7 @@ var PalaceSchema = new SchemaPalace(
 				max: [90,'El valor máximo de la latitud es: 90'],
 				min: [-90, 'El valor minimo de la latitud es: -90']
 			},
-			lon: {
+			lng: {
 				type: Number,
 				required: 'Debe introducir la longitud del palacio',
 				max: [180, 'El valor máximo de la longitud es: 180'],

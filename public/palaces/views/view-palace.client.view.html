@@ -4,10 +4,10 @@
     <!-- Mostrar los botones de edición para artículo creado -->
     <div >
         <a href="/#!/palaces/{{palace._id}}/edit">editar</a>
-        <a href="#" data-ng-click="delete();">borrar</a>
+        <a href="#" data-ng-click="delete(palace._id);">borrar</a>
     </div>
     <h5 data-ng-bind ="palace.coord.lat"></h5>
-    <h5 data-ng-bind ="palace.coord.lon"></h5>
+    <h5 data-ng-bind ="palace.coord.lng"></h5>
     <h5 data-ng-bind ="palace.town"></h5>
     <h5 data-ng-bind ="palace.country"></h5>
 

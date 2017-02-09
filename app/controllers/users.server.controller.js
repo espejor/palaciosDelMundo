@@ -45,7 +45,7 @@ exports.renderSignin = function (req, res, next) {
 			messages: req.flash('error') || req.flash('info')
 		});
 	} else {
-		return res.redirect('/');
+	//	return res.redirect('/');
 	}
 };
 
@@ -61,7 +61,7 @@ exports.renderSignup = function (req, res, next) {
 			messages: req.flash('error')
 		});
 	} else {
-		return res.redirect('/');
+		return res.redirect('/palaces');
 	}
 };
 
@@ -100,7 +100,7 @@ exports.signup = function (req, res, next) {
 			});
 		});
 	} else {
-		return res.redirect('/');
+		return res.redirect('/palaces');
 	}
 };
 

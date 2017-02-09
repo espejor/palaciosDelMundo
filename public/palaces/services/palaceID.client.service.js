@@ -3,5 +3,5 @@
 
 // Crear el service 'palaces'
 angular.module('palaces').service('PalaceID',  function () {
-		return {_id : ''};
-	});
+	return {_id : ''};
+});

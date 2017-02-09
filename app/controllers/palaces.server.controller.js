@@ -30,28 +30,33 @@ exports.create = function (req, res) {
 	var town = req.body.fields.town;
 	var comments = req.body.fields.comments;
 
-	// Crear un nuevo objeto palace
+	// Crear un nuevo objeto palace con los datos del form
+	//Antes le quitamos el campo comments que no forma parte de un objeto Palace
+
 	delete req.body.fields.comments;
 	var palace = new Palace(req.body.fields);
 	
 	// Creamos el directorio donde se almacenará la imagen
-	var path = 'public/img/' + country;	
-	if (!fs.existsSync(path))
-		fs.mkdirSync(path);
+	var path = 'img/' + country;	
+	if (!fs.existsSync("public/" + path))
+		fs.mkdirSync("public/" + path);
 	path += '/' + town;
-	if (!fs.existsSync(path))
-		fs.mkdirSync(path);	
+	if (!fs.existsSync("public/" + path))
+		fs.mkdirSync("public/" + path);	
 	
 
 // Cambiamos el nombre y la carpeta de los archivos almacenados y lo guardamos en la BD
 	for (var i = 0; i < files.length; i++) {
 		var fileName = path + '/' + files[i].name;
-		fs.rename(files[i].path, fileName);
+		fs.rename(files[i].path, "public/" + fileName);
+		
+		//Creamos una nueva imagen y la rellenamos con los datos del form
 
 		var picture = new Picture();
 		picture.palace = palace._id;
 		picture.url = fileName;
-		picture.comment = comments[i];
+		if (comments != undefined)
+			picture.comment = comments[i];
 		picture.save(function (err) {
 			if (err) {
 				// Si ocurre algún error enviar el mensaje de error
@@ -65,7 +70,7 @@ exports.create = function (req, res) {
 		});
 
 		// Llenamos el array de pictures del palace
-		palace.picture.push(picture._id);
+		palace.picture.push(picture);
 	}
 	
 	// Intentar salvar el palace
@@ -112,7 +117,7 @@ exports.update = function (req, res) {
 	// Actualizar los campos palacio
 	palace.name = req.body.name;
 	palace.coord.lat = req.body.coord.lat;
-	palace.coord.lon = req.body.coord.lon;
+	palace.coord.lng = req.body.coord.lng;
 	palace.town = req.body.town;
 	palace.country = req.body.country;
 	palace.type = req.body.type;
@@ -143,23 +148,20 @@ exports.delete = function (req, res) {
 	var palace = req.palace;
 	
 	// Borramos los comentarios sobre el palacio y las fotografías
-	palace.comments = [];
-/*	for (var i = 0; i < palace.comments.length; i++) {
+	for (var i = 0; i < palace.comments.length; i++) {
 		Comment.findById(palace.comments[i], function (error, comment) {
 			if (error) return res.status(500).send(error);
 			// Configurar la propiedad 'author' del comentario
 			comment.delete();
 		});
-	}*/
+	}
+	palace.comments = [];
 	
 	for (var i = 0; i < palace.picture.length; i++) {
-		fs.unlink(palace.picture.url);
-
-/*		Picture.findById(palace.picture[i], function (error, picture) {
-			if (error) return res.status(500).send(error);
-			// Configurar la propiedad 'author' del comentario
-			picture.delete();
-		});*/
+		if (fs.existsSync(palace.picture[i]).url)
+			fs.unlink(palace.picture[i].url);
+		var query = Picture.remove({ _id: palace.picture[i].id });
+		query.exec();
 	}
 	palace.picture = [];
 
