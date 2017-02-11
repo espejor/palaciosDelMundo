@@ -15,7 +15,7 @@ angular.module('palaces')
 		 setNewBoundsSrvc, palacesShowedSrvc, $modal, NgMap, $route, factoryOnePalace,palaceIdSrvc) {
 		
 		$scope.palaces = [];
-		$scope.API_KEY = AIzaSyAODXG4ePzZGNMhRRE5MDLGeOAhvHLqqvo;
+		$scope.API_KEY = 'AIzaSyAODXG4ePzZGNMhRRE5MDLGeOAhvHLqqvo';
 
 		
 		//promesa 
