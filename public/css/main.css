@@ -160,14 +160,14 @@ body {
 }
 .onePalaceTitulo{
   font-family: serif;
-  font-variant: small-caps;
+
   background-color: burlywood;
   color: black;
   display: inherit !important;
 }
 
-.onePalaceTitulo h2 {
-    font-style: italic;
+.onePalaceTitulo h1 {
+    font-weight: bold;
     font-family: Parisienne;
 }
 

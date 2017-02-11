@@ -94,7 +94,7 @@
                             <h5><strong><a data-ng-href="#!/palaces/{{palace._id}}" data-ng-bind="palace.name"></a></strong></h5>
                             <p>{{palace.town}} - {{palace.country}}</p>
 			                <!-- Mostrar los botones de edición para artículo creado -->
-                            <div class="btn-group">
+                            <div class="btn-group" data-ng-show="authentication.user.isAdmin">
                                 <a class="btn btn-info" href="/#!/palaces/{{palace._id}}/edit">editar</a>
                                 <a class="btn btn-danger" href="/#!/palaces" data-ng-click="delete(palace);">borrar</a>
                             </div>
