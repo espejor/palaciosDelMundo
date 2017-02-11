@@ -8,11 +8,11 @@ angular.module('palaces')
 	'indexSrvc',
 	'mapBoundSrvc', 'palacesSrvc', 'normalize', 'noPalacesForCountrySrvc', 
 	'viewSearchSrvc', 'listCountriesSelectedSrvc', 'factoryPalaces', 'setNewBoundsSrvc', 'palacesShowedSrvc', '$modal' , 
-	'NgMap','$route',
+	'NgMap','$route', 'factoryOnePalace', 'palaceIdSrvc',
 	function ($scope, $routeParams, $location, Authentication, Palaces, PalaceID, Pictures, Upload,
 		indexSrvc, mapBoundSrvc,	
 		palacesSrvc, normalize, noPalacesForCountrySrvc, viewSearchSrvc, listCountriesSelectedSrvc, factoryPalaces,
-		 setNewBoundsSrvc, palacesShowedSrvc, $modal, NgMap, $route) {
+		 setNewBoundsSrvc, palacesShowedSrvc, $modal, NgMap, $route, factoryOnePalace,palaceIdSrvc) {
 		
 		$scope.palaces = [];
 
@@ -35,6 +35,23 @@ angular.module('palaces')
 		};
 		
 		$scope.load();
+		
+		$scope.loadOne = function (id) {
+			palaceIdSrvc.id = id;
+			var promesa = factoryOnePalace.getPalace();
+			
+			promesa.then(function (p) {
+				p.selected = true;
+				$scope.palaces.push(p);
+				$scope.fillListCountries();
+				$scope.fillListTowns();
+				palacesSrvc.palaces = $scope.palaces;
+				listCountriesSelectedSrvc.listCountries = $scope.listCountriesSelected;
+
+			}, function (error) {
+				console.log("Error de carga del palacio de ID: " + id );
+			});
+		};
 
 		
 		// -------------Exponer el service Authentication
@@ -81,7 +98,11 @@ angular.module('palaces')
 							type: 'P',
 							rate: 0,
 							resena: $scope.resena,
-							comments: picComments
+							comments: picComments,
+							web: $scope.web,
+							phone: $scope.phone,
+							email: $scope.email,
+							address: $scope.address
 						}, 
 						files: $scope.files
 					}
@@ -90,9 +111,13 @@ angular.module('palaces')
 					var progressPercentage = parseInt(100.0 * event.loaded / event.total);
 					console.log('progress: ' + progressPercentage + '% ');
 				}).success(function (data, status, headers, config) {
-					//var pic = Pictures.find({ pictureId: data.picture });
-					//$scope.palaces.push(pic);
+
 					console.log('file uploaded. Response: ' + JSON.stringify(data));
+					Palaces.get({ palaceId : data._id }, function (res) {
+						$scope.palaces.push(res);
+					}, function (err) {
+						console.log('Error al recuperar el palacio');
+					});
 
 					$location.path('/palaces/');
 				});

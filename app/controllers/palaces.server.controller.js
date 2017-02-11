@@ -63,9 +63,6 @@ exports.create = function (req, res) {
 				return res.status(400).send({
 					message: getErrorMessage(err)
 				});
-			} else {
-				// Enviar una representación JSON del picture 
-//				res.json(picture);
 			}
 		});
 
@@ -158,8 +155,8 @@ exports.delete = function (req, res) {
 	palace.comments = [];
 	
 	for (var i = 0; i < palace.picture.length; i++) {
-		if (fs.existsSync(palace.picture[i]).url)
-			fs.unlink(palace.picture[i].url);
+		if (fs.existsSync('public/' + palace.picture[i].url))
+			fs.unlink('public/' + palace.picture[i].url);
 		var query = Picture.remove({ _id: palace.picture[i].id });
 		query.exec();
 	}

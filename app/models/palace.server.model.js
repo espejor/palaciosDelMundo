@@ -101,6 +101,11 @@ var PalaceSchema = new SchemaPalace(
 			min: 0
 		},
 		resena : String,
+		web: String,
+		phone: String,
+		email: String,
+		address: String,
+
 		comments : [
 			{
 				type: SchemaComment.ObjectId, 

@@ -8,7 +8,7 @@
 
 
         <!-- El formulario nuevo palacio -->
-        <form class="w3-container" data-ng-submit="create()" method="post" enctype="multipart/form-data" novalidate>
+        <form class="w3-container" data-ng-submit="create()" method="post" enctype="multipart/form-data">
             <div class="w3-section">
                 <div class="col-sm-6">
                     <div>
@@ -32,23 +32,50 @@
                         <label for="country">Pais</label>
                         <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="country" id="country" placeholder="Pais" required>
                     </div>
+                 </div>               
+                 <div class="col-sm-6">
+                        <label for="web">Pagina Web</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="url" data-ng-model="web" id="web" placeholder="Página web" >
+
+                        <label for="email">Correo electrónico</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="email" data-ng-model="email" id="email" placeholder="Correo electrónico" >
+
+                        <label for="phone">Teléfono</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="tel" data-ng-model="phone" id="phone" placeholder="Teléfono" >
+
+                        <label for="address">Dirección</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="address" id="address" placeholder="Dirección" >
+                 </div>               
+                 <div class="col-sm-12">
                     <div>
                         <label for="resena">Reseña</label><br />
-                        <textarea data-ng-model="resena" id="resena" cols="42" rows="5" placeholder="Reseña"></textarea>
+                        <textarea class="resena" data-ng-model="resena" id="resenaCreatView "  rows="5" placeholder="Reseña"></textarea>
                     </div>
-                </div>              
-                  
-                <div class="col-sm-6 imagesToUpload">
-                    <div class="fileUpload w3-btn">
-                        <label for="imgPalace">Cargar imágenes:</label>
-                        <input class="w3-btn w3-blue upload"  type="file" id="imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true" />
-                    </div>                        
-                    <a  class="w3-btn w3-red" href="#!/palaces/create" type="button" id="cancelBtn" data-ng-click="deletePictureSelection()">Borrar</a>
 
-                    <div class="item-pack-img-comment" ng-repeat="picture in files">
-                        <img class="item-img" ngf-src="picture" ngf-background="file" height="50" />
-                        <textarea class="item-comment" data-ng-model="picture.comment" cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
-                    </div>
+                     <div imagesToUpload>
+                         <div class="fileUpload w3-btn">
+                             <label for="imgPalace">Cargar imágenes:</label>
+                             <input class="w3-btn w3-blue upload" type="file" id="imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true" />
+                         </div>
+                         <a class="w3-btn w3-red" href="#!/palaces/create" type="button" id="cancelBtn" data-ng-click="deletePictureSelection()">Borrar</a>
+
+                         <div class="listImgToUpload">
+                             <div class="item-pack-img-comment w3-card-12" ng-repeat="picture in files">
+                                <div id="centraImg">
+                                    <div class="text-center">
+                                        <a href="#">
+                                            <img class="itemPalace" ngf-src="picture" ngf-background="file" height="50" />
+                                        </a>
+                                    </div>
+                                </div>
+                                 
+                                 <div class="w3-container ">
+                                     <textarea class="item-comment" data-ng-model="picture.comment" cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
 
                 </div>                
                 <div class="col-sm-12">

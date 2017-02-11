@@ -104,9 +104,25 @@ body {
 }
 
 .itemPalace{
-    width: 100%;
-    margin-bottom: 5px;
-    height: 63%;
+    object-fit: contain;
+    max-width: 100%;
+    height: 100%;
+}
+
+#centraImg {
+    height: 61%;
+    text-align: center;
+}
+
+#flotante {
+   position: relative;
+   height: 0px;
+   padding-bottom: 75%;
+}
+
+#wrapImg {
+    clear: both;
+    height: 100px;
 }
 
 .resBusqueda{
@@ -147,9 +163,41 @@ body {
   font-variant: small-caps;
   background-color: burlywood;
   color: black;
+  display: inherit !important;
+}
+
+.onePalaceTitulo h2 {
+    font-style: italic;
+    font-family: Parisienne;
+}
+
+.photoItemPalace {
+    width: 100%;
 }
 .comment{
 
+}
+
+.resena {
+    width: 100%;
+}
+
+#resena {
+    width: 100%;
+    height: 160px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border:none;
+    max-width:inherit;
+    resize: none;
+    text-align:justify;
+
+    line-height:1.3;
+}
+
+.text-center {
+    text-align: center;
+    display: inline;
 }
 
 .titule{
@@ -186,14 +234,17 @@ body {
 }
 
 .searchBox{
-  margin: 15px;
+  background-color: purple;
+  color: white;
   width: 100%;
   float: right;
+  padding-right: 22px;
 }
 
 #inputSearch{
   float: right;
   width: 30%;
+  margin-top: 20px;
 }
 
 h6{
@@ -288,20 +339,27 @@ h6{
 }
 
 .item-pack-img-comment {
-    display: flex;
+    width: 31.3333%;
+    display: inline-block;
+    margin: 1%;
+    height: 250px;
 }
 
 .item-img {
     height: 100%;
-    width: 100px;
-    margin: 10px;
+    width: 100%;
 }
 
+div.w3-container {
+    height: 39%;
+}
 .item-comment {
-    width: 280px;
-    height: 85px;
-    margin: 5px;
+  
+    height: 87px;
+    margin-top: 5px;
     font-size: 12px;
+    resize:none;
+    border-width:1px;
 }
 
 .fileUpload {
@@ -350,4 +408,16 @@ h6{
 
 .filaPalaces {
     width:100%;
+}
+
+.headListPalaces {
+    display: inline;
+}
+
+span.title {
+    font-family:'Parisienne';
+    font-size: -webkit-xxx-large;
+    font-style: italic;
+    font-weight: bold;
+    margin-left: 17px;
 }

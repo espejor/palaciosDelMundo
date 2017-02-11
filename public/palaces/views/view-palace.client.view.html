@@ -1,19 +1,55 @@
 ﻿<!-- La view palacio -->
-<section data-ng-controller="PalacesController" data-ng-init="findOne()">
-    <h1 data-ng-bind="palace.name"></h1>
-    <!-- Mostrar los botones de edición para artículo creado -->
+
+
+<div data-ng-controller="PalacesController" data-ng-init="findOne()">
+  <div class = "text-center panel onePalaceTitulo">
+    <h2 data-ng-bind="palace.name"></h2>
+    <h4>{{palace.town}} - {{palace.country}}</h4>
+  </div>
+
+  <div class = "row onePalaceRow">
+    <div id = "onePalaceFilter" class="col-sm-4">
+      <div class="panel">
+        <rating class = "rating" ng-model=palace.rate max = "5" readonly ="true"></rating>
+        <span>  ({{palace.rate | number:2}}) </span>
+        <h6><a href = "#/palace#listComments" target="_self">Tiene {{noComments}} comentarios</a></h6>
+        <a class= "btn btn-success" href="/#!/comments/create" data-ng-click="newComment(palace._id);">Añadir comentario</a>
+      </div>
+      <div id = "onePalaceMap" class = "panel">
+        Mapa
+      </div>
+      <div id = "onePalaceDir" class = "panel">
+        <h6><span class="glyphicon glyphicon-envelope"></span><a href="{{web}}" target="_blank"> {{palace.web}} </a></h6>
+        <h6><span class="glyphicon glyphicon-phone-alt"></span> {{palace.phone}}</h6>
+        <h6><span class="glyphicon glyphicon-globe"></span>  {{palace.email}}</h6>
+        <h6><span class="glyphicon glyphicon-home"></span> {{palace.address}}</h6>
+        <h6><img src="icons/city.jpg"> {{palace.town}}</h6>
+        <h6><img src="icons/country.png">  {{palace.country}}</h6>
+
+      </div>
+      <h3 class="panel-heading">Comentarios</h3>
+
+      <div class = "commentList" ng-repeat = "comment in comments" id = "listComments">
+        <div class = "comment panel">
+          <h5><strong>Comentario de: </strong>{{comment.author}}</h5>
+          <h6><strong>Realizado el:  </strong>{{comment.date | date:'dd/MM/yyyy'}}</h6>
+          <h4 class = "titule">"{{comment.titul}}"</h4>
+          <rating class = "rating" ng-model=comment.customerRate max = "5" readonly ="true"></rating>
+          <h6><textarea  class = "commentArea" rows="7" readonly="true">{{comment.text}}</textarea></h6>
+        </div>
+      </div>
+    </div>
+
+    <div id = "onePalaceFull" class="col-sm-8">
+      <img class = "itemPalace panel photoItemPalace" ng-src = {{palace.picture[0].url}}>
+      <div class = "resena panel">
+        <span><textarea id="resena" >{{palace.resena}}</textarea></span>
+      </div>
+
+    </div>
     <div >
         <a href="/#!/palaces/{{palace._id}}/edit">editar</a>
         <a href="#" data-ng-click="delete(palace._id);">borrar</a>
     </div>
-    <h5 data-ng-bind ="palace.coord.lat"></h5>
-    <h5 data-ng-bind ="palace.coord.lng"></h5>
-    <h5 data-ng-bind ="palace.town"></h5>
-    <h5 data-ng-bind ="palace.country"></h5>
-
-    <p data-ng-bind="palace.resena"></p>
-    <div >
-        <a href="/#!/comments/create" data-ng-click="newComment(palace._id);">Nuevo Comentario</a>
-    </div>
-
-</section>
+  </div>
+</div>

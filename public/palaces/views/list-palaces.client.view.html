@@ -3,18 +3,22 @@
     
   <section  ng-controller = 'PalacesController'  data-ng-init="find()">
 
-      <div class="w3-btn-block w3-green w3-left-align" data-ng-show="authentication.user.isAdmin">
-          <a href="/#!/palaces/create">Nuevo Palacio</a>
+      <div class="w3-btn-block w3-light-grey w3-left-align " data-ng-show="authentication.user.isAdmin">
+          <a class="btn btn-success w3-round-xxlarge" href="/#!/palaces/create">Nuevo Palacio</a>
       </div>
-    <div class="searchBox">
-      <input type = "text" list = "buscaPalaces" class=" form-control" id ="inputSearch"
-        placeholder="¿Qué quieres ver?" ng-model = "address"/>
-      <datalist size = "4" ng-show = "p" id = "buscaPalaces" class="form-control" onselect = "addressSelected()" ng-model = "addressCustomSelected">
-        <select size = "6">
-          <option ng-repeat="p in palaces" label="{{p.town}}, ({{p.country}})" value = {{p.name}}>
-        </select>
-      </datalist>
-    </div>
+      <div class="headListPalaces">
+          <div class="searchBox">
+              <span class="title">Palacios</span>
+
+              <input type="text" list="buscaPalaces" class=" form-control" id="inputSearch"
+                  placeholder="¿Qué quieres ver?" ng-model="address" />
+              <datalist size="4" ng-show="p" id="buscaPalaces" class="form-control" onselect="addressSelected()" ng-model="addressCustomSelected">
+                  <select size="6">
+                      <option ng-repeat="p in palaces" label="{{p.town}}, ({{p.country}})" value="{{p.name}}">
+                  </select>
+              </datalist>
+          </div>
+      </div class="headListPalaces">
 
 
     <section>
@@ -75,19 +79,25 @@
             </div>
 
             <div class="col-sm-9">
-	            <h1>Palacios</h1>
-                <div class="row filaPalaces">
+	            
+                <div class="row ">
                     <div class="col-md-4 w3-card-4" data-ng-repeat = "palace in palaces | filter:customerFilter">
-			            <a href="/#!/palaces/{{palace._id}}"><img class = "itemPalace " ng-src = "{{palace.picture[0].url}}"></a>
+                        <div id="centraImg">
+                            <div class="text-center">
+                                <a href="/#!/palaces/{{palace._id}}">
+                                    <img class=" itemPalace"  ng-src="{{palace.picture[0].url}}" />
+                                </a>
+                            </div>
+                        </div>
                         <uib-rating class = "rating" ng-model=palace.rate max = "max" readonly ="isReadonly"></uib-rating>
 			            <div class="w3-container w3-center">
-                            <h6><a data-ng-href="#!/palaces/{{palace._id}}" data-ng-bind="palace.name"></a></h6>
+                            <h5><strong><a data-ng-href="#!/palaces/{{palace._id}}" data-ng-bind="palace.name"></a></strong></h5>
                             <p>{{palace.town}} - {{palace.country}}</p>
 			                <!-- Mostrar los botones de edición para artículo creado -->
-                            <p >
-                                <a href="/#!/palaces/{{palace._id}}/edit">editar</a>
-                                <a href="/#!/palaces" data-ng-click="delete(palace);">borrar</a>
-                            </p>
+                            <div class="btn-group">
+                                <a class="btn btn-info" href="/#!/palaces/{{palace._id}}/edit">editar</a>
+                                <a class="btn btn-danger" href="/#!/palaces" data-ng-click="delete(palace);">borrar</a>
+                            </div>
                         </div>
                     </div>
                 </div>

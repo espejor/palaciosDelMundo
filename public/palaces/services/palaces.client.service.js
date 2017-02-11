@@ -7,20 +7,20 @@ angular.module('palaces')
 	// Usar el service '$resource' para devolver un objeto '$resource' palace
 	return $resource('api/palaces/:palaceId', {
 		palaceId: '@_id'
-	}, {
-		update: {
-			method: 'PUT'
-		}
-	});
+		}, {
+			'get': { method: 'GET' },
+			'query': { method: 'GET', isArray: true },
+			'update': { method: 'PUT' },
+			'save': { method: 'POST' },
+			'remove': { method: 'DELETE' }
+		});
 }])
 
-  .factory('factoryPalaces', ['Palaces','$q', function (Palaces,$q) {
-		var palaces = [];
+  .factory('factoryPalaces', ['Palaces', '$q', function (Palaces, $q) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		
 		Palaces.query(function (data) {
-			palaces = data;
 			defered.resolve(data);
 		}, function (data, status, headers, config) {
 			alert("Ha fallado la carga. Status: " + status);
@@ -32,6 +32,28 @@ angular.module('palaces')
 			}
 		};
 	}])
+
+  .factory('factoryOnePalace', ['Palaces', '$q', '$routeParams', 'palaceIdSrvc', function (Palaces, $q,$routeParams,palaceIdSrvc) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		if (palaceIdSrvc.id) {
+			Palaces.get({ palaceId : palaceIdSrvc.id }, 
+			function (data) {
+				defered.resolve(data);
+			}, function (data, status, headers, config) {
+				alert("Ha fallado la carga del palacio. Status: " + status);
+				defered.reject(status);
+			}
+			);
+		}
+		return {
+			getPalace : function () {
+				return promise;
+			}
+		};
+	}])
+
+
 
   .service('normalize', function () {
 	this.textNormalized = function (texto) {
@@ -63,6 +85,11 @@ angular.module('palaces')
 
   .service('indexSrvc', function () {
 	return { name : '' };
+
+})
+
+  .service('palaceIdSrvc', function () {
+	return { id : '' };
 
 })
 
