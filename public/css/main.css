@@ -114,6 +114,13 @@ body {
     text-align: center;
 }
 
+#centraImgInGallery {
+    height: 100%;
+    text-align: center;
+}
+
+
+
 #flotante {
    position: relative;
    height: 0px;
@@ -187,6 +194,16 @@ body {
     position: relative;
     top: 4em;
     left: 2em;
+}
+
+.openMorePhotosButton {
+    position: relative;
+    bottom: 3em;
+    left: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    font-size: larger;
 }
 
 .closebtn {
@@ -366,6 +383,44 @@ h6{
     display: inline-block;
     margin: 1%;
     height: 250px;
+}
+
+.item-pack-img-gallery {
+    width: 100%;
+    /* display: inline-block; */
+    margin-top: 6%;
+    height: 500px;
+    position: absolute;
+    top: 0;
+}
+
+.pieGallery {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    padding: 40px;
+}
+
+#controls {
+position: relative;
+    top: 250px;
+    font-size: 70px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.leftControl {
+    left: 10px;
+    float: left;
+}
+
+.rightControl {
+    right: 10px;
+    float: right;
+}
+
+.commentPhoto {
+    text-align: justify;
+    padding-top: 12px;
 }
 
 .item-img {

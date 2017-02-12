@@ -17,6 +17,9 @@ angular.module('palaces').config(['$routeProvider',
 		when('/palaces/:palaceId', {
 			templateUrl: 'palaces/views/view-palace.client.view.html'
 		}).
+		when('/palaces/gallery/:palaceId', {
+			templateUrl: 'palaces/views/gallery-palace.client.view.html'
+		}).
 		when('/palaces/:palaceId/edit', {
 			templateUrl: 'palaces/views/edit-palace.client.view.html'
 		});

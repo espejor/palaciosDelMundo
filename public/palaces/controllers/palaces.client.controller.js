@@ -403,6 +403,24 @@ angular.module('palaces')
 			//})
 		}
 		
+		$scope.currentIndex = 0;
+		
+		$scope.setCurrentIndex = function (index) {
+			$scope.currentIndex = index;
+		};
+		
+		$scope.isCurrentIndex = function (index) {
+			return $scope.currentIndex === index;
+		};
+
+		$scope.previousPhoto = function () {
+			$scope.currentIndex = ($scope.currentIndex < $scope.palace.picture.length - 1)?++$scope.currentIndex:0;
+		}
+		
+		$scope.forwrdPhoto = function () {
+			$scope.currentIndex = ($scope.currentIndex > 0)?--$scope.currentIndex:$scope.palace.picture.length - 1;
+		};
+		
 		$scope.customerFilter = function (value) {
 			if (!$scope.map)
 				return true;

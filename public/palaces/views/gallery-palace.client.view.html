@@ -1,0 +1,24 @@
+﻿
+<section data-ng-controller="PalacesController" class="w3-modal" id ="id01" data-ng-init="findOne()" >
+     <div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-gallery-palace">
+         <div class="w3-center"> 
+          
+             <div class="galleryPhoto item-pack-img-gallery w3-card-12 " ng-repeat="picture in palace.picture">
+                 <div id="centraImgInGallery">
+                     <div class="text-center" >
+                         <img id="galleryPhoto_{{$index}}" class="itemPalace" src="{{picture.url}}" ng-hide ="!isCurrentIndex($index)"/>
+                     </div>
+                 </div>
+                 <div class="pieGallery">
+                     <div class="commentPhoto">
+                         <span ng-hide="!isCurrentIndex($index)">{{picture.comment}}</span>
+                     </div>
+                 </div>           
+
+             </div>
+             <div id="controls">
+                 <a class="glyphicon glyphicon-circle-arrow-left leftControl" href="/#!/palaces/gallery/{{palace._id}}" ng-click="previousPhoto()"></a>
+                 <a class="glyphicon glyphicon-circle-arrow-right rightControl" href="/#!/palaces/gallery/{{palace._id}}" ng-click="forwrdPhoto()"></a>
+             </div id="controls">         </div>
+     </div>
+</section>

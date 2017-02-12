@@ -88,7 +88,10 @@
                 <a class="btn btn-info" href="/#!/palaces/{{palace._id}}/edit">editar</a>
                 <a class="btn btn-danger" href="/#!/palaces/{{palace._id}}" data-ng-click="openAlert();">borrar</a>
             </div>     
-           <img class="itemPalace panel photoItemPalace" ng-src="{{palace.picture[0].url}}">
+             <div class="containerPhoto">
+                 <img class="itemPalace panel photoItemPalace" ng-src="{{palace.picture[0].url}}">
+                 <a class="openMorePhotosButton" href="/#!/palaces/gallery/{{palace._id}}" >Más fotos</a>
+             </div>
         </div>
         <div class = "resena panel">
         <span><textarea id="resena"  readonly>{{palace.resena}}</textarea></span>
