@@ -171,6 +171,29 @@ body {
     font-family: Parisienne;
 }
 
+.containerOnePalacePicture {
+}
+
+.alertBeforeDelete {
+    position: relative;
+    top: 16px;
+}
+
+.alert-danger {
+    background-color: rgba(242, 222, 222, 0.5);
+}
+
+.botonesFotoOnePalace {
+    position: relative;
+    top: 4em;
+    left: 2em;
+}
+
+.closebtn {
+    float: right;
+    font-size: 20px;
+}
+
 .photoItemPalace {
     width: 100%;
 }

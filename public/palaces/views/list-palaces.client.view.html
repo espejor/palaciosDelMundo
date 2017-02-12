@@ -81,6 +81,24 @@
             <div class="col-sm-9">
 	            
                 <div class="row ">
+
+
+                        <!--------------------------------
+                        ---Mensaje de ALERTA PRE DELETE---      
+                        ---------------------------------->
+                        <div class="alert alert-danger alertBeforeDelete" data-ng-show="deletePalace">
+                                <span class="btn closebtn text-right" data-ng-click="closeAlert();">
+                                    <strong>&times;</strong> 
+                                </span>
+                                <h4>Se va a eliminar el palacio <strong>{{palaceToDelete}}</strong>. ¿Desea continuar?</h4><br />
+                            <a href="/#!/palaces" class="btn btn-success" data-ng-click="delete(palace);">Continuar</a>
+                            <a href="/#!/palaces" class="btn btn-danger" data-ng-click="closeAlert();">Cancelar</a>
+                        </div>   
+                         <!--------------------------------   
+                        ---------------------------------->
+
+
+
                     <div class="col-md-4 w3-card-4" data-ng-repeat = "palace in palaces | filter:customerFilter">
                         <div id="centraImg">
                             <div class="text-center">
@@ -89,16 +107,17 @@
                                 </a>
                             </div>
                         </div>
-                        <uib-rating class = "rating" ng-model=palace.rate max = "max" readonly ="isReadonly"></uib-rating>
+                         <uib-rating class = "rating" ng-model=palace.rate max = "max" readonly ="isReadonly"></uib-rating>
 			            <div class="w3-container w3-center">
                             <h5><strong><a data-ng-href="#!/palaces/{{palace._id}}" data-ng-bind="palace.name"></a></strong></h5>
                             <p>{{palace.town}} - {{palace.country}}</p>
 			                <!-- Mostrar los botones de edición para artículo creado -->
                             <div class="btn-group" data-ng-show="authentication.user.isAdmin">
                                 <a class="btn btn-info" href="/#!/palaces/{{palace._id}}/edit">editar</a>
-                                <a class="btn btn-danger" href="/#!/palaces" data-ng-click="delete(palace);">borrar</a>
+                                <a class="btn btn-danger" href="/#!/palaces" data-ng-click="openAlert(palace.name);">borrar</a>
                             </div>
                         </div>
+
                     </div>
                 </div>
 	            <!-- Si no hay artículos en la lista, sugire al usuario que cree un nuevo artículo -->

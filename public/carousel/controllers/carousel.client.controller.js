@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('carousel')
-.controller('CarruselCtrl', function ($scope) {
+.controller('carousel', function ($scope) {
 	$scope.setInterval = 4000;
 	$scope.slides = [
 		{

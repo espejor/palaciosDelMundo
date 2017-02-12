@@ -16,7 +16,7 @@ angular.module('palaces')
 		
 		$scope.palaces = [];
 		$scope.API_KEY = 'AIzaSyC8wzZzLM9fgggkBLsGUSwIFVJgM2YORtg';
-
+		$scope.deletePalace = false;
 		
 		//promesa 
 		$scope.load = function () {
@@ -169,8 +169,8 @@ angular.module('palaces')
 				// Usar el método '$remove' del palacio para borrar el palacio
 				palace.$remove(function () {
 					// Eliminar el palacio de la lista de palacios
-					for (var i in $scope.palaces) {
-						if ($scope.palaces[i] === palace) {
+					for (var i = 0; i < $scope.palaces.lendth; i++) {
+						if ($scope.palaces[i]._id === palace._id) {
 							$scope.palaces.splice(i, 1);
 						}
 					}
@@ -193,8 +193,15 @@ angular.module('palaces')
 //			$location.path('comments/create');
 		};
 		
+		$scope.openAlert = function(palace) {
+			$scope.deletePalace = true;
+			$scope.palaceToDelete = palace;
+		}
 		
-	
+		$scope.closeAlert  = function() {
+			$scope.deletePalace = false;
+		}
+		
 
 		
 		$scope.deletePictureSelection = function () {

@@ -13,7 +13,7 @@
         <rating class = "rating" ng-model=palace.rate max = "5" readonly ="true"></rating>
         <span>  ({{palace.rate | number:2}}) </span>
         <h6><a href = "#/palace#listComments" target="_self">Tiene {{noComments}} comentarios</a></h6>
-        <a class= "btn btn-success" href="/#!/comments/create" data-ng-click="newComment(palace._id);">Añadir comentario</a>
+        <a  data-ng-show="authentication.user" class= "btn btn-success" href="/#!/comments/create" data-ng-click="newComment(palace._id);">Añadir comentario</a>
       </div>
         <div id = "onePalaceMap" class = "panel">
                 <div id = "searchMap" class = "panel ">
@@ -21,15 +21,15 @@
                             <div map-lazy-load = "https://maps.google.com/maps/api/js?key={{API_KEY}}">
                                 <ng-map class = "google-map-container"
                                     zoom = "9"
-                                    <!--Centro--> 
+                                    center="{{palace.coord.lat}},{{palace.coord.lng}}"
                                     default-style = "false">
-                                    <marker  ng-repeat = "palace in palaces"
+                                    <marker  ng-repeat = "p in palaces"
                                         id="custom-marker-{{$index}}"
-                                        position="[{{palace.coord.lat}},{{palace.coord.lng}}]"
+                                        position="[{{p.coord.lat}},{{p.coord.lng}}]"
                                         icon= "icons/palace_blue.png"
-                                        on-mouseover="showPalace(event, palace)"
+                                        on-mouseover="showPalace(event, p)"
                                         on-mouseout="hideInfo(event)"
-                                        on-click = "goToPalace(event,palace)">
+                                        on-click = "goToPalace(event,p)">
                                     </marker>
                                     <info-window id="myInfoWindow" class="infoWindow" disableAutoPan =" true">
                                         <a ng-href = "#/onePalace" ng-click = "setIndex(selectedPalace.name)">
@@ -60,21 +60,41 @@
           <h6><strong>Realizado el:  </strong>{{comment.date | date:'dd/MM/yyyy'}}</h6>
           <h4 class = "titule">"{{comment.titul}}"</h4>
           <rating class = "rating" ng-model=comment.customerRate max = "5" readonly ="true"></rating>
-          <h6><textarea  class = "commentArea" rows="7" readonly="true">{{comment.text}}</textarea></h6>
+          <h6><textarea  class = "commentArea" rows="7" readonly>{{comment.text}}</textarea></h6>
         </div>
       </div>
     </div>
 
+
+
+
     <div id = "onePalaceFull" class="col-sm-8">
-      <img class = "itemPalace panel photoItemPalace" ng-src = {{palace.picture[0].url}}>
-      <div class = "resena panel">
-        <span><textarea id="resena" >{{palace.resena}}</textarea></span>
+            <!--------------------------------
+            ---Mensaje de ALERTA PRE DELETE---      
+            ---------------------------------->
+            <div class="alert alert-danger " data-ng-show="deletePalace">
+                    <span class="btn closebtn text-right" data-ng-click="closeAlert();">
+                        <strong>&times;</strong> 
+                    </span>
+                    <h4>Se va a eliminar el palacio <strong>{{palace.name}}</strong>. ¿Desea continuar?</h4><br />
+                <a href="/#!/palaces" class="btn btn-success" data-ng-click="delete(palace);">Continuar</a>
+                <a href="/#!/palaces/{{palace._id}}" class="btn btn-danger" data-ng-click="closeAlert();">Cancelar</a>
+            </div>   
+             <!--------------------------------   
+            ---------------------------------->
+                    
+         <div class="containerOnePalacePicture">
+            <div class="btn-group botonesFotoOnePalace" data-ng-show="authentication.user.isAdmin">
+                <a class="btn btn-info" href="/#!/palaces/{{palace._id}}/edit">editar</a>
+                <a class="btn btn-danger" href="/#!/palaces/{{palace._id}}" data-ng-click="openAlert();">borrar</a>
+            </div>     
+           <img class="itemPalace panel photoItemPalace" ng-src="{{palace.picture[0].url}}">
+        </div>
+        <div class = "resena panel">
+        <span><textarea id="resena"  readonly>{{palace.resena}}</textarea></span>
       </div>
 
     </div>
-    <div >
-        <a href="/#!/palaces/{{palace._id}}/edit">editar</a>
-        <a href="#" data-ng-click="delete(palace._id);">borrar</a>
-    </div>
+
   </div>
 </div>
