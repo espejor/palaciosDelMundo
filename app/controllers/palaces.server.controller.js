@@ -132,28 +132,30 @@ exports.update = function (req, res) {
 //		palace.comments.push(req.body.comment);
 //	palace.picture = req.body.picture;
 	// Cambiamos el nombre y la carpeta de los archivos almacenados y lo guardamos en la BD
-	for (var i = 0; i < files.length; i++) {
-		var fileName = path + '/' + files[i].name;
-		fs.rename(files[i].path, "public/" + fileName);
-		
-		//Creamos una nueva imagen y la rellenamos con los datos del form
-		
-		var picture = new Picture();
-		picture.palace = palace.id;
-		picture.url = fileName;
-		if (comments != undefined)
-			picture.comment = comments[i];
-		picture.save(function (err) {
-			if (err) {
-				// Si ocurre algún error enviar el mensaje de error
-				return res.status(400).send({
-					message: getErrorMessage(err)
-				});
-			}
-		});
-		
-		// Llenamos el array de pictures del palace
-		palace.picture.push(picture);
+	if (files) {
+		for (var i = 0; i < files.length; i++) {
+			var fileName = path + '/' + files[i].name;
+			fs.rename(files[i].path, "public/" + fileName);
+			
+			//Creamos una nueva imagen y la rellenamos con los datos del form
+			
+			var picture = new Picture();
+			picture.palace = palace.id;
+			picture.url = fileName;
+			if (comments != undefined)
+				picture.comment = comments[i];
+			picture.save(function (err) {
+				if (err) {
+					// Si ocurre algún error enviar el mensaje de error
+					return res.status(400).send({
+						message: getErrorMessage(err)
+					});
+				}
+			});
+			
+			// Llenamos el array de pictures del palace
+			palace.picture.push(picture);
+		}
 	}
 	
 	// Intentar salvar el palacio actualizado

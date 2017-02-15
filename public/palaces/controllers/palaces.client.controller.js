@@ -167,6 +167,7 @@ angular.module('palaces')
 				
 				for (var i in $scope.files)
 					picComments[i] = $scope.files[i].comment;
+			}
 				Upload.upload({
 					url: '/api/palaces/' + $scope.palace._id, 
 					method: 'PUT',
@@ -209,9 +210,9 @@ angular.module('palaces')
 					console.log('Error ' + resp.status);
 				});
 
-			} else {
-				$scope.error = 'Un palacio debe tener al menos una fotografía';
-			}
+//			} else {
+////				$scope.error = 'Un palacio debe tener al menos una fotografía';
+//			}
 		};
 
 
