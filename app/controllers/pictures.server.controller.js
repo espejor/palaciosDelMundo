@@ -137,6 +137,9 @@ exports.delete = function (req, res) {
 			});
 		} else {
 			// Enviar una representación JSON del foto 
+			if (fs.existsSync('public/' + picture.url))
+				fs.unlink('public/' + picture.url);
+
 			res.json(picture);
 		}
 	});
@@ -163,7 +166,7 @@ exports.pictureByID = function (req, res, next, id) {
 // Crear un nuevo controller middleware que es usado para autorizar una operación foto 
 exports.hasAuthorization = function (req, res, next) {
 	// si el usuario actual no es el creador del foto, enviar el mensaje de error apropiado
-	if (req.picture.author.id !== req.user.id) { // sustituido (req.palace.creador.id !== req.user.id) por (false)
+	if (!req.user.isAdmin) { // sustituido (req.palace.creador.id !== req.user.id) por (false)
 		return res.status(403).send({
 			message: 'Usuario no está autorizado'
 		});

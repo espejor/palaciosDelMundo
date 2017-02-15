@@ -20,7 +20,7 @@
                         <div class = "google-map-container">
                             <div map-lazy-load = "https://maps.google.com/maps/api/js?key={{API_KEY}}">
                                 <ng-map class = "google-map-container"
-                                    zoom = "9"
+                                    zoom = "17"
                                     center="{{palace.coord.lat}},{{palace.coord.lng}}"
                                     default-style = "false">
                                     <marker  ng-repeat = "p in palaces"
@@ -44,10 +44,10 @@
                         </div>
                     </div>      </div>
       <div id = "onePalaceDir" class = "panel">
-        <h6><span class="glyphicon glyphicon-envelope"></span><a href="{{web}}" target="_blank"> {{palace.web}} </a></h6>
+        <h6><span class="glyphicon glyphicon-globe"></span><a href="{{web}}" target="_blank"> {{palace.web}} </a></h6>
         <h6><span class="glyphicon glyphicon-phone-alt"></span> {{palace.phone}}</h6>
-        <h6><span class="glyphicon glyphicon-globe"></span>  {{palace.email}}</h6>
-        <h6><span class="glyphicon glyphicon-home"></span> {{palace.address}}</h6>
+        <h6><span class="glyphicon glyphicon-home"></span>  {{palace.email}}</h6>
+        <h6><span class="glyphicon glyphicon-envelope"></span> {{palace.address}}</h6>
         <h6><img src="icons/city.jpg"> {{palace.town}}</h6>
         <h6><img src="icons/country.png">  {{palace.country}}</h6>
 

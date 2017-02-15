@@ -100,7 +100,7 @@
 
 
                     <div class="col-md-4 w3-card-4" data-ng-repeat = "palace in palaces | filter:customerFilter">
-                        <div id="centraImg">
+                        <div class = "centraImg">
                             <div class="text-center">
                                 <a href="/#!/palaces/{{palace._id}}">
                                     <img class=" itemPalace"  ng-src="{{palace.picture[0].url}}" />
@@ -114,7 +114,7 @@
 			                <!-- Mostrar los botones de edición para artículo creado -->
                             <div class="btn-group" data-ng-show="authentication.user.isAdmin">
                                 <a class="btn btn-info" href="/#!/palaces/{{palace._id}}/edit">editar</a>
-                                <a class="btn btn-danger" href="/#!/palaces" data-ng-click="openAlert(palace.name);">borrar</a>
+                                <a class="btn btn-danger" href="/#!/palaces" data-ng-click="openAlert(palace);">borrar</a>
                             </div>
                         </div>
 

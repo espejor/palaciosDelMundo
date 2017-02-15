@@ -37,12 +37,12 @@ exports.create = function (req, res) {
 	var palace = new Palace(req.body.fields);
 	
 	// Creamos el directorio donde se almacenará la imagen
-	var path = 'img/' + country;	
+	var path = 'img/palaces';	
 	if (!fs.existsSync("public/" + path))
 		fs.mkdirSync("public/" + path);
-	path += '/' + town;
-	if (!fs.existsSync("public/" + path))
-		fs.mkdirSync("public/" + path);	
+	//path += '/' + town;
+	//if (!fs.existsSync("public/" + path))
+	//	fs.mkdirSync("public/" + path);	
 	
 
 // Cambiamos el nombre y la carpeta de los archivos almacenados y lo guardamos en la BD
@@ -110,20 +110,51 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
 	// Obtener el palacio usando el objeto 'request'
 	var palace = req.palace;
+	var files = req.files.files;
+	var path = 'img/palaces';
+	var comments = req.body.fields.comments;
+
 	
 	// Actualizar los campos palacio
-	palace.name = req.body.name;
-	palace.coord.lat = req.body.coord.lat;
-	palace.coord.lng = req.body.coord.lng;
-	palace.town = req.body.town;
-	palace.country = req.body.country;
-	palace.type = req.body.type;
-	palace.rate = req.body.rate;
-	palace.resena = req.body.resena;
+	palace.name = req.body.fields.name;
+	palace.coord.lat = req.body.fields.coord.lat;
+	palace.coord.lng = req.body.fields.coord.lng;
+	palace.town = req.body.fields.town;
+	palace.country = req.body.fields.country;
+	palace.type = req.body.fields.type;
+	palace.rate = req.body.fields.rate;
+	palace.web = req.body.fields.web;
+	palace.address = req.body.fields.address;
+	palace.email = req.body.fields.email;
+	palace.phone = req.body.fields.phone;
+	palace.resena = req.body.fields.resena;
 //	if (req.body.comment) 
 //		palace.comments.push(req.body.comment);
 //	palace.picture = req.body.picture;
-	
+	// Cambiamos el nombre y la carpeta de los archivos almacenados y lo guardamos en la BD
+	for (var i = 0; i < files.length; i++) {
+		var fileName = path + '/' + files[i].name;
+		fs.rename(files[i].path, "public/" + fileName);
+		
+		//Creamos una nueva imagen y la rellenamos con los datos del form
+		
+		var picture = new Picture();
+		picture.palace = palace.id;
+		picture.url = fileName;
+		if (comments != undefined)
+			picture.comment = comments[i];
+		picture.save(function (err) {
+			if (err) {
+				// Si ocurre algún error enviar el mensaje de error
+				return res.status(400).send({
+					message: getErrorMessage(err)
+				});
+			}
+		});
+		
+		// Llenamos el array de pictures del palace
+		palace.picture.push(picture);
+	}
 	
 	// Intentar salvar el palacio actualizado
 	palace.save(function (err) {

@@ -1,5 +1,5 @@
 ﻿<!-- Crear la View Palaces -->
-<section data-ng-controller="PalacesController" class="w3-modal" id ="createPalaceModal">
+<section data-ng-controller="PalacesController" class="w3-modal" id="id01" >
     <div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-create-palace">
         <div class="w3-center">          
             <h2  class="w3-center modal-title " ><strong>Nuevo Palacio</strong></h2>
@@ -18,8 +18,8 @@
                     <div>
                         <label for="coord">Coordenadas</label>
                         <div class="input-coord">
-                            <input class="w3-input w3-border w3-margin-bottom" type="number" data-ng-model="lat" id="lat" placeholder="Latitud" required>
-                            <input class="w3-input w3-border w3-margin-bottom" type="number" data-ng-model="lng" id="lng" placeholder="Longitud" required>
+                            <input class="w3-input w3-border w3-margin-bottom" type="number"  step="0.000001" data-ng-model="lat" id="lat" placeholder="Latitud" required>
+                            <input class="w3-input w3-border w3-margin-bottom" type="number"  step="0.000001" data-ng-model="lng" id="lng" placeholder="Longitud" required>
                         </div>
 
                     </div>
@@ -52,7 +52,7 @@
                         <textarea class="resena" data-ng-model="resena" id="resenaCreatView "  rows="5" placeholder="Reseña"></textarea>
                     </div>
 
-                     <div imagesToUpload>
+                     <div class="imagesToUpload">
                          <div class="fileUpload w3-btn">
                              <label for="imgPalace">Cargar imágenes:</label>
                              <input class="w3-btn w3-blue upload" type="file" id="imgPalace" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true" />
@@ -61,7 +61,7 @@
 
                          <div class="listImgToUpload">
                              <div class="item-pack-img-comment w3-card-12" ng-repeat="picture in files">
-                                <div id="centraImg">
+                                <div class = "centraImg">
                                     <div class="text-center">
                                         <a href="#">
                                             <img class="itemPalace" ngf-src="picture" ngf-background="file" height="50" />

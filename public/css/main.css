@@ -109,7 +109,22 @@ body {
     height: 100%;
 }
 
-#centraImg {
+.iconDelete {
+    position: relative;
+    top: -120px;
+    left: 0;
+    height: 60%;
+    opacity: 0;
+    filter: alpha(opacity=0); /* For IE8 and earlier */    
+}
+
+.iconDelete:hover{
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */    
+}
+
+
+.centraImg {
     height: 61%;
     text-align: center;
 }
@@ -119,7 +134,10 @@ body {
     text-align: center;
 }
 
-
+.errorMsgPicturesInPalace {
+    background-color: red;
+    color: white;
+}
 
 #flotante {
    position: relative;
@@ -364,6 +382,12 @@ h6{
 .w3-modal {
     display: block;
     padding-top:30px;
+}
+
+.closeGallery {
+    position: relative;
+    top: 54px;
+    right: -71px;
 }
 
 .w3-input {

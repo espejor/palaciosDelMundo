@@ -53,6 +53,7 @@ module.exports = function () {
 	require('../app/routes/index.server.routes.js')(app);
 	require('../app/routes/users.server.routes.js')(app);
 	require('../app/routes/palaces.server.routes.js')(app);
+	require('../app/routes/pictures.server.routes.js')(app);
 	require('../app/routes/comments.server.routes.js')(app);
 
 	app.use(express.static('./public'));

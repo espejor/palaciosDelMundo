@@ -112,7 +112,6 @@ angular.module('palaces')
 					var progressPercentage = parseInt(100.0 * event.loaded / event.total);
 					console.log('progress: ' + progressPercentage + '% ');
 				}).success(function (data, status, headers, config) {
-
 					console.log('file uploaded. Response: ' + JSON.stringify(data));
 					Palaces.get({ palaceId : data._id }, function (res) {
 						$scope.palaces.push(res);
@@ -151,14 +150,71 @@ angular.module('palaces')
 		
 		$scope.update = function () {
 			// Usar el método '$update' de palace para enviar una petición PUT apropiada
-			$scope.palace.$update(function () {
-				// Si un palace fue actualizado de modo correcto, redirigir el user a la página del palace 
-				$location.path('palaces/' + $scope.palace._id);
-			}, function (errorResponse) {
-				// En otro caso, presenta al user un mensaje de error
-				$scope.error = errorResponse.data.message;
-			});
+			//$scope.palace.$update(function () {
+
+			//	$scope.palace.picture.$update(function () {
+			//		// Si un palace fue actualizado de modo correcto, redirigir el user a la página del palace 
+			//		$location.path('palaces/' + $scope.palace._id);
+			//	});
+			//}, function (errorResponse) {
+			//	// En otro caso, presenta al user un mensaje de error
+			//	$scope.error = errorResponse.data.message;
+			//});
+
+			if ($scope.files && $scope.files.length) {
+				var picComments = [];
+				$scope.urlPic = $scope.files[0].path;
+				
+				for (var i in $scope.files)
+					picComments[i] = $scope.files[i].comment;
+				Upload.upload({
+					url: '/api/palaces/' + $scope.palace._id, 
+					method: 'PUT',
+					data : {
+						fields: {
+							name: $scope.palace.name,
+							coord : { lat: $scope.palace.coord.lat, lng: $scope.palace.coord.lng },
+							town: $scope.palace.town,
+							country: $scope.palace.country,
+							type: 'P',
+							rate: 0,
+							resena: $scope.palace.resena,
+							comments: picComments,
+							web: $scope.palace.web,
+							phone: $scope.palace.phone,
+							email: $scope.palace.email,
+							address: $scope.palace.address
+						}, 
+						files: $scope.files
+					}
+				})
+				.progress(function (event) {
+					var progressPercentage = parseInt(100.0 * event.loaded / event.total);
+					console.log('progress: ' + progressPercentage + '% ');
+				}).success(function (data, status, headers, config) {
+					console.log('file uploaded. Response: ' + JSON.stringify(data));
+					Palaces.get({ palaceId : data._id }, function (res) {
+						for (var i in $scope.palaces) {
+							if ($scope.palaces[i]._id === $scope.palace._id) {
+								$scope.palaces.splice(i, 1);
+							}
+						}
+						$scope.palaces.push(res);
+					}, function (err) {
+						console.log('Error al recuperar el palacio');
+					});
+					
+					$location.path('/palaces/');
+				}).error(function (resp) {
+					console.log('Error ' + resp.status);
+				});
+
+			} else {
+				$scope.error = 'Un palacio debe tener al menos una fotografía';
+			}
 		};
+
+
 		
 		// ---------------------Crear un nuevo método controller para borrar un único palacio
 		// ---------------------------------------------------------------------------------------------------
@@ -169,11 +225,13 @@ angular.module('palaces')
 				// Usar el método '$remove' del palacio para borrar el palacio
 				palace.$remove(function () {
 					// Eliminar el palacio de la lista de palacios
-					for (var i = 0; i < $scope.palaces.lendth; i++) {
+					for (var i in $scope.palaces) {
 						if ($scope.palaces[i]._id === palace._id) {
 							$scope.palaces.splice(i, 1);
 						}
 					}
+					$scope.closeAlert();
+//					$location.path('/palaces');
 				});
 			} else {
 				// En otro caso, usar el método '$remove' de palace para borrar el palace
@@ -183,11 +241,50 @@ angular.module('palaces')
 			}
 		};
 		
-		// ---------------------------------------------------------------------------------------------------
+		
+		$scope.deletePicture = function (picture) {
+			// Si una piture fue enviado al método, borrarlo
+			if (picture) {
+				if ($scope.palace.picture.length > 1) {
+					
+					Pictures.delete({ pictureId : picture._id }, function (res) {
+						// Eliminar el palacio de la lista de palacios
+						for (var i in $scope.palace.picture) {
+							if ($scope.palace.picture[i]._id === picture._id) {
+								$scope.palace.picture.splice(i, 1);
+							}
+						};
+						$location.path('/palaces/' + $scope.palace._id + '/edit');
+					}, function (err) {
+						console.log('Error al recuperar el palacio');
+					});
+				} else {
+					$scope.errorPicturesInPalace = 'Un palacio debe tener al menos una fotografía. Imposible borrar la imagen';
+					setTimeout(function () {
+						$scope.errorPicturesInPalace = false;
+					},5000);
+				}
+				// Usar el método '$remove' del picture para borrar el picture
+			} else {
+				// En otro caso, usar el método '$remove' de palace para borrar el palace
+				$scope.palace.picture.$remove(function () {
+					//$location.path('/palaces');
+				});
+			}
+		};
+
+				// ---------------------------------------------------------------------------------------------------
 		// ---------------------------------------------------------------------------------------------------
 		// ---------------------------------------------------------------------------------------------------
 		
 		
+		//$scope.fillFiles = function () {
+		//	for (var i = 0; i < $scope.palace.picture.lendth; i++) {
+		//		var f = palace.picture[i];
+		//		$scope.files.push(f);
+		//	}
+		//}		
+
 		$scope.newComment = function (palace_id) {
 			PalaceID._id = palace_id;
 //			$location.path('comments/create');
@@ -195,7 +292,8 @@ angular.module('palaces')
 		
 		$scope.openAlert = function(palace) {
 			$scope.deletePalace = true;
-			$scope.palaceToDelete = palace;
+			$scope.palaceToDelete = palace.name;
+			$scope.palace = palace;
 		}
 		
 		$scope.closeAlert  = function() {
@@ -207,8 +305,7 @@ angular.module('palaces')
 		$scope.deletePictureSelection = function () {
 			$scope.files = [];
 		};
-		
-		
+
 		$scope.$watch('address', function (newValue, oldValue) {
 			if (newValue !== oldValue)
 				if ($scope.map) {
@@ -314,15 +411,18 @@ angular.module('palaces')
 		
 		
 		NgMap.getMap().then(function (map) {
+			var vlat = 40;
+			var vlng = -5;
+			var vzoom = 5;
+			if ($scope.palace) {
+				var vlat = $scope.palace.coord.lat;
+				var vlng = $scope.palace.coord.lng;
+				var vzoom = 17;
+			}
+
 			$scope.map = map;
-			//    if (palacesShowed == null){    // primera vez que se entra en la pÃ¡gina de bÃºsqueda
-			//$scope.verPorPalacios = false;
-			$scope.map.setCenter({ lat: 0, lng: 0 });
-			$scope.map.zoom = 0;
-			//$scope.createMarkers();
-			$scope.calculateNewBounds();
-			//  }
-//			.myMap = $scope.map;
+			$scope.map.setCenter({ lat: vlat, lng: vlng });
+			$scope.map.setZoom(vzoom);
 		});
 		
 		
@@ -420,6 +520,16 @@ angular.module('palaces')
 		$scope.forwrdPhoto = function () {
 			$scope.currentIndex = ($scope.currentIndex > 0)?--$scope.currentIndex:$scope.palace.picture.length - 1;
 		};
+		
+		//// Get the modal
+		//var modal = document.getElementById('id01');
+		
+		//// When the user clicks anywhere outside of the modal, close it
+		//window.onclick = function (event) {
+		//	if (event.target == modal) {
+		//		modal.style.display = "none";
+		//	}
+		//}
 		
 		$scope.customerFilter = function (value) {
 			if (!$scope.map)

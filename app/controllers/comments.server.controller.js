@@ -136,7 +136,7 @@ exports.commentByID = function (req, res, next, id) {
 // Crear un nuevo controller middleware que es usado para autorizar una operación comentario 
 exports.hasAuthorization = function (req, res, next) {
 	// si el usuario actual no es el creador del comentario, enviar el mensaje de error apropiado
-	if (req.comment.author.id !== req.user.id) { // sustituido (req.palace.creador.id !== req.user.id) por (false)
+	if (!req.user.isAdmin) { // sustituido (req.palace.creador.id !== req.user.id) por (false)
 		return res.status(403).send({
 			message: 'Usuario no está autorizado'
 		});

@@ -1,47 +1,121 @@
-﻿<!-- La view editar palacio -->
-<section data-ng-controller="PalacesController" data-ng-init="findOne()">
-	<h1>Editar Palacio</h1>
-	<!-- Formulario editar palacio -->
-	<form data-ng-submit="update()" novalidate>
-		<div>
-			<label for="name">Nombre</label>
-			<div>
-				<input type="text" data-ng-model="palace.name" id="name" placeholder="Nombre" required>
-			</div>
-		</div>
-		<div>
-			<label for="coord">Coordenadas</label>
-			<div>
-				<input type="number" data-ng-model="palace.coord.lat" id="lat" placeholder="Latitud" required>
-			</div>
-			<div>
-				<input type="number" data-ng-model="palace.coord.lng" id="lng" placeholder="Longitud" required>
-			</div>
-		</div>
-		<div>
-			<label for="town">Ciudad</label>
-			<div>
-				<input type="text" data-ng-model="palace.town" id="town" placeholder="Ciudad" required disabled>
-			</div>
-		</div>
-		<div>
-			<label for="country">Pais</label>
-			<div>
-				<input type="text" data-ng-model="palace.country" id="country" placeholder="Pais" required disabled>
-			</div>
-		</div>
-		<div>
-			<label for="resena">Reseña</label>
-			<div>
-				<textarea data-ng-model="palace.resena" id="resena" cols="30" rows="10" placeholder="Reseña"></textarea>
-			</div>
-		</div>
-		<div>
-			<input type="submit" value="Actualizar">
-		</div>
-		<!-- El elemento mensaje error -->
-		<div data-ng-show="error">
-			<strong data-ng-bind="error"></strong>
-		</div>
-	</form>
+﻿
+
+<section data-ng-controller="PalacesController" class="w3-modal" id="id01" data-ng-init="findOne();fillFiles();">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-create-palace">
+        <div class="w3-center">          
+            <h2  class="w3-center modal-title " ><strong>Editar Palacio de {{palace.name}}</strong></h2>
+            <a href="#!/palaces" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
+       </div>
+
+
+        <!-- El formulario nuevo palacio -->
+        <form class="w3-container" data-ng-submit="update()" method="post" enctype="multipart/form-data">
+            <div class="w3-section">
+                <div class="col-sm-6">
+                    <div>
+                        <label for="name">Nombre</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="palace.name" id="Text1" placeholder="Nombre" required>
+                    </div>
+                    <div>
+                        <label for="coord">Coordenadas</label>
+                        <div class="input-coord">
+                            <input class="w3-input w3-border w3-margin-bottom" type="number" step="0.000001" data-ng-model="palace.coord.lat" id="Number1" placeholder="Latitud" required>
+                            <input class="w3-input w3-border w3-margin-bottom" type="number" step="0.000001"  data-ng-model="palace.coord.lng" id="Number2" placeholder="Longitud" required>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label for="town">Ciudad</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="palace.town" id="Text2" placeholder="Ciudad" required>
+                    </div>
+                    <div>
+                        <label for="country">Pais</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="palace.country" id="Text3" placeholder="Pais" required>
+                    </div>
+                 </div>               
+                 <div class="col-sm-6">
+                        <label for="web">Pagina Web</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="palace.web" id="web" placeholder="Página web" >
+
+                        <label for="email">Correo electrónico</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="email" data-ng-model="palace.email" id="email" placeholder="Correo electrónico" >
+
+                        <label for="phone">Teléfono</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="tel" data-ng-model="palace.phone" id="phone" placeholder="Teléfono" >
+
+                        <label for="address">Dirección</label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="palace.address" id="address" placeholder="Dirección" >
+                 </div>               
+                 <div class="col-sm-12">
+                    <div>
+                        <label for="resena">Reseña</label><br />
+                        <textarea class="resena" data-ng-model="palace.resena" id="resenaCreatView "  rows="5" placeholder="Reseña"></textarea>
+                    </div>
+
+                     <div class="imagesInPalace">
+                        <div class="errorMsgPicturesInPalace" data-ng-show="errorPicturesInPalace" data-ng-hide="!errorPicturesInPalace">
+                            <div data-ng-bind="errorPicturesInPalace"></div>
+                        </div>
+
+                         <div class="listImgInPalace">
+                             <div class="item-pack-img-comment w3-card-12" ng-repeat="picture in palace.picture">
+                                <div class = "centraImg">
+                                    <div class="text-center">
+
+                                            <img class="itemPalace" ngf-src="picture.url"/>
+                                            <img class="iconDelete itemPalace" src="icons/iconDeleteRed.png" ng-click="deletePicture(picture)"/>
+
+
+                                    </div>
+                                </div>
+
+                                 <div class="w3-container ">
+                                     <textarea class="item-comment" data-ng-model="picture.comment" cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
+                                 </div>
+                             </div>
+                             
+                         </div>
+                     </div>
+
+
+                     <div class="imagesToUpload">
+                         <div class="fileUpload w3-btn">
+                             <label for="imgPalace">Agregar más imágenes</label>
+                             <input class="w3-btn w3-blue upload" type="file" id="File1" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true" />
+                         </div>
+                         <input class="w3-btn w3-red" type="button" id="A1" data-ng-click="deletePictureSelection()" value="Borrar selección"/>
+
+                         <div class="listImgToUpload">
+                             <div class="item-pack-img-comment w3-card-12" ng-repeat="picture in files">
+                                <div class = "centraImg">
+                                    <div class="text-center">
+
+                                            <img class="itemPalace" ngf-src="picture" ngf-background="file" height="50" />
+
+                                    </div>
+                                </div>
+                                 
+                                 <div class="w3-container ">
+                                     <textarea class="item-comment" data-ng-model="picture.comment" cols="30" rows="5" placeholder="Comente sobre esta fotografía"></textarea>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                </div>                
+                <div class="col-sm-12">
+                    <div>
+                        <input class="w3-btn w3-green ok" type="submit" value="Actualizar">
+                    </div>
+                    <!-- El elemento mensaje de error -->
+                    <div data-ng-show="error">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </div class="col-sm-12">            
+
+            </div>
+        </form>
+    </div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-signin">
 </section>

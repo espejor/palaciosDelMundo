@@ -13,8 +13,8 @@ module.exports = function (app) {
 	   .get(pictures.list)
 	   .post(users.requiresLogin, pictures.create);
 	
-	app.route('/api/pictures/upload')
-		.post(pictures.upload);
+	//app.route('/api/pictures/upload')
+	//	.post(pictures.upload);
 
 	
 	// Configurar las rutas 'palaces' parametrizadas
