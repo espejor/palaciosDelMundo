@@ -99,7 +99,7 @@ angular.module('palaces')
 							type: 'P',
 							rate: 0,
 							resena: $scope.resena,
-							comments: picComments,
+							picComments: picComments,
 							web: $scope.web,
 							phone: $scope.phone,
 							email: $scope.email,
@@ -149,18 +149,6 @@ angular.module('palaces')
 		// ---------------------------------------------------------------------------------------------------
 		
 		$scope.update = function () {
-			// Usar el método '$update' de palace para enviar una petición PUT apropiada
-			//$scope.palace.$update(function () {
-
-			//	$scope.palace.picture.$update(function () {
-			//		// Si un palace fue actualizado de modo correcto, redirigir el user a la página del palace 
-			//		$location.path('palaces/' + $scope.palace._id);
-			//	});
-			//}, function (errorResponse) {
-			//	// En otro caso, presenta al user un mensaje de error
-			//	$scope.error = errorResponse.data.message;
-			//});
-
 			if ($scope.files && $scope.files.length) {
 				var picComments = [];
 				$scope.urlPic = $scope.files[0].path;
@@ -178,9 +166,9 @@ angular.module('palaces')
 							town: $scope.palace.town,
 							country: $scope.palace.country,
 							type: 'P',
-							rate: 0,
+							//rate: 0,
 							resena: $scope.palace.resena,
-							comments: picComments,
+							picComments: picComments,
 							web: $scope.palace.web,
 							phone: $scope.palace.phone,
 							email: $scope.palace.email,

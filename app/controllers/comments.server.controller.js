@@ -23,7 +23,8 @@ exports.create = function (req, res) {
 	// Crear un nuevo objeto comentario
 	var comment = new Comment(req.body);
 
-	comment.author = req.user;	
+	comment.author = req.user;
+	comment.date = new Date();
 	
 	// Intentar salvar el comentario
 	comment.save(function (err) {
@@ -78,7 +79,7 @@ exports.update = function (req, res) {
 	comment.author = req.body.author;
 	comment.date = req.body.date;
 	comment.customerRate = req.body.customerRate;
-	comment.titule = req.body.titule;
+	comment.title = req.body.titule;
 	comment.text = req.body.text;
 	
 	

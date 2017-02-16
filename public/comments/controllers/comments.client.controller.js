@@ -2,29 +2,55 @@
 'use strict';
 
 // Crear el controller 'comments'
-angular.module('comments').controller('CommentsController', ['$scope', '$routeParams', '$location', 'Authentication', 'Comments', 'PalaceID',
-	function ($scope, $routeParams, $location, Authentication, Comments, PalaceID) {
+angular.module('comments').controller('CommentsController', ['$scope', '$routeParams', '$location', 'Authentication', 'Comments', 'PalaceID','Palaces',
+	function ($scope, $routeParams, $location, Authentication, Comments, PalaceID,Palaces) {
 		// Exponer el service Authentication
 		$scope.authentication = Authentication;
+		$scope.palace = PalaceID._id;		
+//		$scope.noComments = $scope.palace.comments.length;
+
 		
 		// Crear un nuevo método controller para crear nuevos comments
 		$scope.create = function () {
 			// Usar los campos form para crear un nuevo objeto $resource comment
-			var comment = new Comments({
-				palace: PalaceID._id,
-				customerRate: this.customerRate,
-				titule: this.titule,
-				text: this.text,
-			});
+			if (this.customerRate) {
+				var comment = new Comments({
+					palace: $scope.palace,
+					customerRate: this.customerRate,
+					title: this.title,
+					text: this.text,
+				});
+				// Usar el método '$save' de comment para enviar una petición POST apropiada
+				comment.$save(function (response) {
+					Palaces.get({ palaceId : $scope.palace }, function (res) {
+						var c = res.comments.length;
+						var R = res.rate;
+						var r = $scope.customerRate;
+						if (r == undefined) r = 0;
+						res.rate = ((c * R) + r) / (c + 1);
+						
+						res.$update({ rate: res.rate }, function (palace, err) {
+							if (palace) {
+								console.log(palace);
+								// Si un comentario fue creado de modo correcto, redireccionar al usuario a la página del comentario 
+								$location.path('palaces/' + res._id);
+							} else {
+								console.log(err);
+							}
+						});
+					}, function (err) {
+						console.log('Error al recuperar el palacio');
+					});
+					
+				}, function (errorResponse) {
+					// En otro caso, presentar al usuario el mensaje de error
+					$scope.error = errorResponse.data.message;
+				});
+			} else {
+				$scope.error = "Debe introducir una valoración";
+			}
 			
-			// Usar el método '$save' de comment para enviar una petición POST apropiada
-			comment.$save(function (response) {
-				// Si un comentario fue creado de modo correcto, redireccionar al usuario a la página del comentario 
-				$location.path('comments/' + response._id);
-			}, function (errorResponse) {
-				// En otro caso, presentar al usuario el mensaje de error
-				$scope.error = errorResponse.data.message;
-			});
+
 		};
 		
 		// Crear un nuevo método controller para recuperar una lista de comentarios

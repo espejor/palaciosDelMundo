@@ -22,7 +22,7 @@ var CommentSchema = new SchemaComment(
 			max: 5,
 			min: 0
 		},
-		titule : String,
+		title : String,
 		text : String
 	});
 

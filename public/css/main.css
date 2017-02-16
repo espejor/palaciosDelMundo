@@ -10,7 +10,7 @@ body {
   padding-bottom: 20px;*/
 }
 
-.titulePage{
+.titlePage{
   font-size: xx-large;
   color: black !important;
 }
@@ -236,6 +236,14 @@ body {
 
 }
 
+.createCommentModalView {
+    padding-top: 100px  !important;
+}
+
+.headingModalComment {
+    padding-top:1px;
+}
+
 .resena {
     width: 100%;
 }
@@ -258,7 +266,7 @@ body {
     display: inline;
 }
 
-.titule{
+.title{
   font-size: 18px;
   font-family: serif;
   font-style: italic;
@@ -344,6 +352,10 @@ h6{
     resize: none;
     width: 100%;
   }
+
+.ratingComment {
+    display: flex;
+}
 
   .btnClose{
     border: none;
@@ -522,4 +534,5 @@ span.title {
     font-style: italic;
     font-weight: bold;
     margin-left: 17px;
+    color:white;
 }

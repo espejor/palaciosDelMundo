@@ -1,32 +1,38 @@
 ﻿<!-- Crear la View Palaces -->
-<section data-ng-controller="CommentsController">
-	<h1>Nuevo Comentario</h1>
-	<!-- El formulario nuevo comentario -->
-	<form data-ng-submit="create()" novalidate>
-		<div>
-			<label for="titule">Título</label>
-			<div>
-				<input type="text" data-ng-model="titule" id="titule" placeholder="Título" required>
-			</div>
-		</div>
-		<div>
-			<label for="rate">Valoración</label>
-			<div>
-				<input type="number" data-ng-model="customerRate" id="rate" required>
-			</div>
-		</div>
-		<div>
-			<label for="text">Comentario</label>
-			<div>
-				<textarea data-ng-model="text" id="text" cols="100" rows="10" placeholder="Aquí su comentario"></textarea>
-			</div>
-		</div>
-		<div>
-			<input type="submit">
-		</div>
-		<!-- El elemento mensaje de error -->
-		<div data-ng-show="error">
-			<strong data-ng-bind="error"></strong>
-		</div>
-	</form>
+<section data-ng-controller="CommentsController" class="w3-modal createCommentModalView" id="id01" data-ng-init="">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom headingModalComment" id="modal-window-create-comment">
+        <a href="/#!/palaces/{{palace}}" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
+        <div class="w3-container  w3-light-grey panel w3-margin  w3-center">
+            <h1 >Nuevo Comentario</h1>
+        </div>	<!-- El formulario nuevo comentario -->
+	        <form  class="w3-container" data-ng-submit="create()">
+		        <div>
+			        <label for="title">Título</label>
+			        <div>
+				        <input class="w3-input w3-border w3-margin-bottom" type="text" data-ng-model="title" id="title" placeholder="Título" required>
+			        </div>
+		        </div>
+		        <div class="ratingComment">
+			        <label for="rate">Valoración</label>
+			        <div>
+                        <rating class = "rating" ng-model="customerRate" max = "5"  id="rate" readonly ="false"></rating>
+			        </div>
+		            <div data-ng-show="error">
+			            <h5 data-ng-bind="error" class=" w3-text-red"></h5>
+		            </div>		        
+
+		        </div>
+		        <div>
+			        <label for="text">Comentario</label>
+			        <div>
+				        <textarea class="commentArea" data-ng-model="text" id="text" cols="100" rows="5" placeholder="Aquí su comentario"></textarea>
+			        </div>
+		        </div>
+		        <div>
+			        <input  class="w3-btn w3-green ok" type="submit">
+		        </div>
+		        <!-- El elemento mensaje de error -->
+
+	        </form>
+        </div>
 </section>

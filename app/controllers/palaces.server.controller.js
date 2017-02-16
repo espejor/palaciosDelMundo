@@ -28,12 +28,12 @@ exports.create = function (req, res) {
 	var files = req.files.files;
 	var country = req.body.fields.country;
 	var town = req.body.fields.town;
-	var comments = req.body.fields.comments;
+	var picComments = req.body.fields.picComments;
 
 	// Crear un nuevo objeto palace con los datos del form
 	//Antes le quitamos el campo comments que no forma parte de un objeto Palace
 
-	delete req.body.fields.comments;
+	delete req.body.fields.picComments;
 	var palace = new Palace(req.body.fields);
 	
 	// Creamos el directorio donde se almacenará la imagen
@@ -55,8 +55,8 @@ exports.create = function (req, res) {
 		var picture = new Picture();
 		picture.palace = palace._id;
 		picture.url = fileName;
-		if (comments != undefined)
-			picture.comment = comments[i];
+		if (picComments != undefined)
+			picture.comment = picComments[i];
 		picture.save(function (err) {
 			if (err) {
 				// Si ocurre algún error enviar el mensaje de error
@@ -112,22 +112,42 @@ exports.update = function (req, res) {
 	var palace = req.palace;
 	var files = req.files.files;
 	var path = 'img/palaces';
-	var comments = req.body.fields.comments;
-
+	var picComments;
+	if ( req.body.fields)
+		picComments = req.body.fields.picComments;
 	
 	// Actualizar los campos palacio
-	palace.name = req.body.fields.name;
-	palace.coord.lat = req.body.fields.coord.lat;
-	palace.coord.lng = req.body.fields.coord.lng;
-	palace.town = req.body.fields.town;
-	palace.country = req.body.fields.country;
-	palace.type = req.body.fields.type;
-	palace.rate = req.body.fields.rate;
-	palace.web = req.body.fields.web;
-	palace.address = req.body.fields.address;
-	palace.email = req.body.fields.email;
-	palace.phone = req.body.fields.phone;
-	palace.resena = req.body.fields.resena;
+	
+	if (req.body.fields) {
+		palace.comments = req.body.fields.comments;
+		palace.name = req.body.fields.name;
+		palace.coord.lat = req.body.fields.coord.lat;
+		palace.coord.lng = req.body.fields.coord.lng;
+		palace.town = req.body.fields.town;
+		palace.country = req.body.fields.country;
+		palace.type = req.body.fields.type;
+		palace.rate = req.body.fields.rate;
+		palace.web = req.body.fields.web;
+		palace.address = req.body.fields.address;
+		palace.email = req.body.fields.email;
+		palace.phone = req.body.fields.phone;
+		palace.resena = req.body.fields.resena;
+	} else {
+		palace.comments = req.body.comments;
+		palace.name = req.body.name;
+		palace.coord.lat = req.body.coord.lat;
+		palace.coord.lng = req.body.coord.lng;
+		palace.town = req.body.town;
+		palace.country = req.body.country;
+		palace.type = req.body.type;
+		palace.rate = req.body.rate;
+		palace.web = req.body.web;
+		palace.address = req.body.address;
+		palace.email = req.body.email;
+		palace.phone = req.body.phone;
+		palace.resena = req.body.resena;
+	}
+	
 //	if (req.body.comment) 
 //		palace.comments.push(req.body.comment);
 //	palace.picture = req.body.picture;
@@ -142,8 +162,8 @@ exports.update = function (req, res) {
 			var picture = new Picture();
 			picture.palace = palace.id;
 			picture.url = fileName;
-			if (comments != undefined)
-				picture.comment = comments[i];
+			if (picComments != undefined)
+				picture.comment = picComments[i];
 			picture.save(function (err) {
 				if (err) {
 					// Si ocurre algún error enviar el mensaje de error
@@ -179,11 +199,8 @@ exports.delete = function (req, res) {
 	
 	// Borramos los comentarios sobre el palacio y las fotografías
 	for (var i = 0; i < palace.comments.length; i++) {
-		Comment.findById(palace.comments[i], function (error, comment) {
-			if (error) return res.status(500).send(error);
-			// Configurar la propiedad 'author' del comentario
-			comment.delete();
-		});
+		var query = Comment.remove({ _id: palace.comments[i]._id });
+		query.exec();		
 	}
 	palace.comments = [];
 	
@@ -212,7 +229,7 @@ exports.delete = function (req, res) {
 // Crear un nuevo controller middleware que recupera un único palacio existente
 exports.palaceByID = function (req, res, next, id) {
 	// Usar el método model 'findById' para encontrar un único palacio 
-	Palace.findById(id).populate('comments picture').exec(function (err, palace) {
+	Palace.findById(id).populate({path:'comments picture', populate: {path: 'author'} }).exec(function (err, palace) {
 		if (err) return next(err);
 		if (!palace) return next(new Error('Fallo al cargar el palacio ' + id));
 		
