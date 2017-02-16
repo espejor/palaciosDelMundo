@@ -34,6 +34,15 @@ module.exports = function (app) {
 		successRedirect: '/'
 	}));
 	
+	// Configurar las rutas Facebook OAuth 
+	app.get('/oauth/facebook', passport.authenticate('facebook', {
+		failureRedirect: '/signin'
+	}));
+	app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
+		failureRedirect: '/signin',
+		successRedirect: '/'
+	}));
+	
 	//Configurar la route 'signout'
 	app.get('/signout', users.signout);
 };
