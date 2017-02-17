@@ -43,6 +43,15 @@ module.exports = function (app) {
 		successRedirect: '/'
 	}));
 	
+	// Configurar las rutas Twitter OAuth 
+	app.get('/oauth/twitter', passport.authenticate('twitter', {
+		failureRedirect: '/signin'
+	}));
+	app.get('/oauth/twitter/callback', passport.authenticate('twitter', {
+		failureRedirect: '/signin',
+		successRedirect: '/'
+	}));
+	
 	//Configurar la route 'signout'
 	app.get('/signout', users.signout);
 };
