@@ -15,8 +15,8 @@
 		callbackURL: 'https://palacesoftheworld.herokuapp.com/oauth/twitter/callback'
 	},
 	facebook: {
-		clientID: '154326215077046',
-		clientSecret: 'c20a600e373b6d39e18d75da33065cf1',
+		clientID: '587274111470055',
+		clientSecret: 'dfed370a2faf6b62a76f179b79e508ce',
 		callbackURL: 'https://palacesoftheworld.herokuapp.com/oauth2/facebook/callback'
 	}
 };
