@@ -24,7 +24,8 @@ module.exports = function () {
 			username: profile.username,
 			provider: 'google',
 			providerId: profile.id,
-			providerData: providerData
+			providerData: providerData,
+			photo: profile.photos[0].value
 		};
 		
 		users.saveOAuthUserProfile(req, providerUserProfile, done);

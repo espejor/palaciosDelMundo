@@ -7,15 +7,16 @@
 		callbackURL: 'https://palacesoftheworld.herokuapp.com/oauth/google/callback'
 	},	
 	googlemaps: {
-			API_KEY: 'AIzaSyC8wzZzLM9fgggkBLsGUSwIFVJgM2YORtg'
+		API_KEY: 'AIzaSyC8wzZzLM9fgggkBLsGUSwIFVJgM2YORtg'
 	},
 	twitter: {
-		clientID: '16GvzQxd3WTthR67ydwoSddi9',
-		clientSecret: 'bJmb9QkGajDRd2Rwgv4q4xkKAiW7rhW3SarItZ4TTbaM09fjhn',
+		clientID: 'B3aOXMDx9AxZgwuZFIGH57bEc',
+		clientSecret: 'mqnXHghGOaVyFZVlAJTOKG7rYHkjKrRm4bfvMbzKlsaM3mCRff',
 		callbackURL: 'https://palacesoftheworld.herokuapp.com/oauth/twitter/callback'
 	},
 	facebook: {
 		clientID: '154326215077046',
 		clientSecret: 'c20a600e373b6d39e18d75da33065cf1',
 		callbackURL: 'https://palacesoftheworld.herokuapp.com/#!/oauth/facebook/callback'
-	}};
+	}
+};

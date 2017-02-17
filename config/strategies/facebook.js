@@ -24,7 +24,8 @@ module.exports = function () {
 			username: profile.username,
 			provider: 'facebook',
 			providerId: profile.id,
-			providerData: providerData
+			providerData: providerData,
+//			photo: profile.photo.value
 		};
 		
 		users.saveOAuthUserProfile(req, providerUserProfile, done);

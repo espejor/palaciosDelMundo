@@ -12,7 +12,7 @@
 	twitter: {
 		clientID: '16GvzQxd3WTthR67ydwoSddi9',
 		clientSecret: 'bJmb9QkGajDRd2Rwgv4q4xkKAiW7rhW3SarItZ4TTbaM09fjhn',
-		callbackURL: 'https://localhost:3000/oauth/twitter/callback'
+		callbackURL: 'http://localhost:3000/oauth/twitter/callback'
 	},
 	facebook: {
 		clientID: '1859732197618336',

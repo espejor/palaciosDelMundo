@@ -8,8 +8,7 @@ module.exports = function () {
 	passport.use(new TwitterStrategy ({
 		consumerKey: config.twitter.clientID,
 		consumerSecret: config.twitter.clientSecret,
-		callbackURL: config.twitter.callbackURL,
-		passReqToCallback: true
+		callbackURL: config.twitter.callbackURL
 	},
   function (req, accessToken, refreshToken, profile, done) {
 		var providerData = profile._json;
@@ -17,14 +16,15 @@ module.exports = function () {
 		providerData.refreshToken = refreshToken;
 		
 		var providerUserProfile = {
-			firstName: profile.name.givenName,
-			lastName: profile.name.familyName,
+//			firstName: profile.name.givenName,
+//			lastName: profile.name.familyName,
 			fullName: profile.displayName,
-			//email: profile.emails.value,
+//			email: profile.emails[0].value,
 			username: profile.username,
 			provider: 'twitter',
 			providerId: profile.id,
-			providerData: providerData
+			providerData: providerData,
+			photo: profile.photos[0].value
 		};
 		
 		users.saveOAuthUserProfile(req, providerUserProfile, done);
