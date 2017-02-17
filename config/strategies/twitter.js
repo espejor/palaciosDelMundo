@@ -6,8 +6,8 @@
 
 module.exports = function () {
 	passport.use(new TwitterStrategy ({
-		clientID: config.twitter.clientID,
-		clientSecret: config.twitter.clientSecret,
+		consumerKey: config.twitter.clientID,
+		consumerSecret: config.twitter.clientSecret,
 		callbackURL: config.twitter.callbackURL,
 		passReqToCallback: true
 	},

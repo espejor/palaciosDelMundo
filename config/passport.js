@@ -10,4 +10,4 @@ module.exports = function () {
 			_id : id
 		}, '-password -salt', function (err, user) {
 			done(err, user);
-		});	});		require('./strategies/local.js')();	require('./strategies/google.js')();	require('./strategies/facebook.js')();};
+		});	});		require('./strategies/local.js')();	require('./strategies/google.js')();	require('./strategies/twitter.js')();	require('./strategies/facebook.js')();};
