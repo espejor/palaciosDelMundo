@@ -42,6 +42,10 @@ module.exports = function (app) {
 		failureRedirect: '/signin',
 		successRedirect: '/'
 	}));
+	app.get('/oauth2/facebook/callback', passport.authenticate('facebook', {
+		failureRedirect: '/signin',
+		successRedirect: '/'
+	}));
 	
 	// Configurar las rutas Twitter OAuth 
 	app.get('/oauth/twitter', passport.authenticate('twitter', {
