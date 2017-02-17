@@ -5,6 +5,9 @@
 		clientID: '1017339095363-mj7lectrn5bqhodvo5dtfk5eb4jfhjhh.apps.googleusercontent.com',
 		clientSecret: 'XOqZCbZUsrnvdUuAuntJBKkB',
 		callbackURL: 'http://localhost:3000/oauth/google/callback'
+	},	
+	googlemaps: {
+		API_KEY: 'AIzaSyC8wzZzLM9fgggkBLsGUSwIFVJgM2YORtg'
 	},
 	facebook: {
 		clientID: '1859732197618336',

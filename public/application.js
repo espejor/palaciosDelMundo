@@ -7,6 +7,7 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [
 	'users', 
 	'main', 
 	'carousel',
+	'setup',
 	'comments', 
 	'ui.bootstrap',
 	'angularModalService',

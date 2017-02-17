@@ -400,9 +400,9 @@ angular.module('palaces')
 		
 		
 		NgMap.getMap().then(function (map) {
-			var vlat = 40;
-			var vlng = -5;
-			var vzoom = 5;
+			var vlat = 0;
+			var vlng = 0;
+			var vzoom = 0;
 			if ($scope.palace) {
 				var vlat = $scope.palace.coord.lat;
 				var vlng = $scope.palace.coord.lng;

@@ -40,7 +40,8 @@
                 
               </div>
               <div data-ng-show="authentication.user">
-                <span class="label label-success" data-ng-bind="authentication.user.fullName"></span>
+                <span data-ng-hide="authentication.user.isAdmin" class="label label-success" data-ng-bind="authentication.user.fullName"></span>
+                <a  href="/#!/setup" data-ng-show="authentication.user.isAdmin" class="label label-success" data-ng-bind="authentication.user.fullName"></a>
                 <a class="label label-danger" href="/signout">Cerrar Sesión</a>
               </div>
             <div class="input-group-btn">
@@ -98,6 +99,10 @@
 		<script type="text/javascript" src="/carousel/carousel.client.module.js"></script>
 		<script type="text/javascript" src="/carousel/controllers/carousel.client.controller.js"></script>
 		<script type="text/javascript" src="/carousel/config/carousel.client.routes.js"></script>
+
+		<script type="text/javascript" src="/setup/setup.client.module.js"></script>
+		<script type="text/javascript" src="/setup/controllers/setup.client.controller.js"></script>
+		<script type="text/javascript" src="/setup/config/setup.client.routes.js"></script>
 
 		<script type = "text/javascript" src = "/users/users.client.module.js"></script>
 		<script type = "text/javascript" src = "/users/services/authentication.client.service.js"></script>

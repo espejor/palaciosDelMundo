@@ -11,8 +11,8 @@ body {
 }
 
 .titlePage{
-  font-size: xx-large;
-  color: black !important;
+    font-size: x-large;
+    color: whitesmoke!important;
 }
 
 .carrusel{
@@ -28,7 +28,7 @@ body {
 .infoInit {
     padding: 2% 15% 2% 15%;
     height: 183px;
-    width: 1369px;
+    width: 100%;
     text-align: justify;
     border: none;
 }
@@ -269,6 +269,10 @@ body {
     line-height:1.3;
 }
 
+.resenaCreatView {
+    max-width:100%;
+}
+
 .text-center {
     text-align: center;
     display: inline;
@@ -291,8 +295,8 @@ body {
 
     z-index: 10;
     width: 100%;
-    font-size: x-large;
-    background-color: rgba(0, 0, 0, 0);
+    /*font-size: x-large;*/
+    background-color: darkblue;
     border-color: rgba(0, 0, 0, 0);
 }
 
