@@ -244,6 +244,11 @@ body {
 
 }
 
+.fondoRepeat{
+    background-image: url("../icons/fleur-de-lis-mini.png");
+    background-repeat: repeat;
+}
+
 .createCommentModalView {
     padding-top: 100px  !important;
 }
@@ -254,6 +259,7 @@ body {
 
 .resena {
     width: 100%;
+    max-width:100%;
 }
 
 #resena {
@@ -273,9 +279,9 @@ body {
     max-width:100%;
 }
 
-.text-center {
-    text-align: center;
-    display: inline;
+.centrado {
+    /*text-align: center;*/
+    display: inline !important;
 }
 
 .title{
@@ -431,6 +437,31 @@ h6{
     display: inline-block;
     margin: 1%;
     height: 250px;
+}
+
+.item-pack-img-setup {
+    width: 22.3333%;
+    display: inline-block;
+    margin: 1%;
+    height: 250px;
+}
+
+.inputSetup>input {
+    margin: 6px 0px 0px;
+    width: 100%;
+    max-width:100%;
+}
+
+.inputSetup>textarea {
+    margin: 6px 0px 0px;
+    width: 100%;
+    max-width:100%;
+
+    resize:none;
+}
+
+.inputSetup {
+    font-size: small;
 }
 
 .item-pack-img-gallery {

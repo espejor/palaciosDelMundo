@@ -1,8 +1,88 @@
 
-<div ng-controller = "SetupController">
-    <div class="container">
-        <label for="infoInit">Información de inicio</label><br />
-        <textarea class="resena" data-ng-model="initText" id="infoInit "  rows="5" placeholder="Texto de inicio de la página principal"></textarea>
+<div ng-controller = "SetupController" data-ng-init="find()">
+    <h4 class="text-center well">Configuración</h4>
+
+
+    <div class="panel">
+        <label for="listPicturesSetup">Imágenes del Carrusel</label><br />
+        <div class="imagesInPalace" id ="listPicturesSetup">
+            <div class="errorMsgPicturesInPalace" data-ng-show="errorPicturesInPalace" data-ng-hide="!errorPicturesInPalace">
+                <div data-ng-bind="errorPicturesInPalace"></div>
+            </div>
+
+            <div class="listImgInPalace">
+                <div class="item-pack-img-setup w3-card-12" ng-repeat="picture in setup[0].photosCarousel">
+                    <div class="centraImg">
+                        <div class="centrado text-center">
+                            <img class="itemPalace" ngf-src="picture.url" />
+                            <img class="iconDelete itemPalace" src="icons/iconDeleteRed.png" ng-click="deletePicture(picture)" />
+                        </div>
+                    </div>
+
+                    <div class="w3-container inputSetup">
+                        <input class="" data-ng-model="picture.title" placeholder="Título para esta fotografía" required></input>
+                        <textarea class="" data-ng-model="picture.txt" placeholder="Texto para esta fotografía" required></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+<form >    
+    <div class="imagesToUpload panel">
+        <div class="fileUpload w3-btn">
+            <label for="imgPalace">Agregar más imágenes al carrusel</label>
+            <input class="w3-btn w3-blue upload" type="file" id="File1" name="imgPalace" ngf-select ng-model="files" multiple accept="image/*" ngf-keep="true" ngf-keep-distinct="true" />
+        </div>
+        <input class="w3-btn w3-red" type="button" id="A1" data-ng-click="deletePictureSelection()" value="Borrar selección"/>
+
+        <div class="listImgToUpload">
+            <div class="item-pack-img-setup w3-card-12" ng-repeat="picture in files">
+                <div class = "centraImg">
+                    <div class="centrado text-center">
+                        <img class="itemPalace" ngf-src="picture" ngf-background="file" height="50" />
+                    </div>
+                </div>
+                                 
+                <div class="w3-container inputSetup">
+                    <input class="" data-ng-model="picture.title" placeholder="Título para esta fotografía" required></input>
+                    <textarea class="" data-ng-model="picture.txt" placeholder="Texto para esta fotografía" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="panel">
+        <label for="infoInit">Información de inicio</label><br />
+        <textarea class="resena" data-ng-model="setup[0].initInfo" id="infoInit "  rows="5" placeholder="Texto de inicio de la página principal"></textarea>
+
+    </div>
+    <div class="btn-group btn-group-justified">
+        <div  class="btn-group">
+            <button type="submit" class="btn btn-success" ng-click="update()">Actualizar</button>
+        </div  class="btn-group">        
+        <div  class="btn-group">
+            <button class="btn btn-danger " ng-click="">Cancelar</button>
+        </div>    
+
+    </div class="btn-group btn-group-justified">
+
+</form>
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+
+
+
+
 </div>
 
