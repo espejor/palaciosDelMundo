@@ -72,6 +72,10 @@ angular.module('setup')
 			$scope.files = [];
 		};
 		
+		$scope.closeSetupWindow = function () {
+			$location.path('/');
+		}
+		
 		
 		$scope.deletePicture = function (picture) {
 			if ($scope.setup[0].photosCarousel.length > 1) {
