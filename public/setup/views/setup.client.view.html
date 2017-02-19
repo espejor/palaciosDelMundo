@@ -6,10 +6,6 @@
     <div class="panel">
         <label for="listPicturesSetup">Imágenes del Carrusel</label><br />
         <div class="imagesInPalace" id ="listPicturesSetup">
-            <div class="errorMsgPicturesInPalace" data-ng-show="errorPicturesInPalace" data-ng-hide="!errorPicturesInPalace">
-                <div data-ng-bind="errorPicturesInPalace"></div>
-            </div>
-
             <div class="listImgInPalace">
                 <div class="item-pack-img-setup w3-card-12" ng-repeat="picture in setup[0].photosCarousel">
                     <div class="centraImg">
@@ -41,7 +37,7 @@
             <div class="item-pack-img-setup w3-card-12" ng-repeat="picture in files">
                 <div class = "centraImg">
                     <div class="centrado text-center">
-                        <img class="itemPalace" ngf-src="picture" ngf-background="file" height="50" />
+                        <img class="itemPalace" ngf-src="picture" ngf-background="file"/>
                     </div>
                 </div>
                                  

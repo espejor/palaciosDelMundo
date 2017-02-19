@@ -5,7 +5,7 @@
        
              <div class="galleryPhoto item-pack-img-gallery w3-card-12 " ng-repeat="picture in palace.picture">
                  <div id="centraImgInGallery">
-                     <div class="text-center" >
+                     <div class="text-center centrado" >
                          <img id="galleryPhoto_{{$index}}" class="itemPalace" src="{{picture.url}}" ng-hide ="!isCurrentIndex($index)"/>
                      </div>
                  </div>
@@ -17,8 +17,8 @@
 
              </div>
              <div id="controls">
-                 <a class="glyphicon glyphicon-circle-arrow-left leftControl" href="/#!/palaces/gallery/{{palace._id}}" ng-click="previousPhoto()"></a>
-                 <a class="glyphicon glyphicon-circle-arrow-right rightControl" href="/#!/palaces/gallery/{{palace._id}}" ng-click="forwrdPhoto()"></a>
+                 <a class="glyphicon glyphicon-circle-arrow-left leftControl LRcontrol" href="/#!/palaces/gallery/{{palace._id}}" ng-click="previousPhoto()"></a>
+                 <a class="glyphicon glyphicon-circle-arrow-right rightControl LRcontrol" href="/#!/palaces/gallery/{{palace._id}}" ng-click="forwrdPhoto()"></a>
              </div id="controls">         </div>
           <a href="/#!/palaces/{{palace._id}}" class="closeGallery w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
       </div>

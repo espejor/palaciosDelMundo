@@ -13,6 +13,9 @@
 
 
   <body  >
+<!--      SDK de facebook-->
+      <div id="fb-root"></div>
+
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -58,7 +61,14 @@
 
 	  <div ng-view></div>
 
+      <div id="socialNetWorks">
+          <div class="fb-like" data-href="https://palacesoftheworld.herokuapp.com/#!/" data-width="100" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://palacesoftheworld.herokuapp.com/#!/" data-via="pepeSpeculum" data-size="large">Tweet</a> 
+
+      </div id="socialNetWorks">
 	    <script type = "text/javascript">	window.user = <%- user || 'null' %>; </script>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>      
+        <script>(function(d, s, id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.8&appId=587278398136293";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
 
 		<script type = "text/javascript" src="/lib/jquery/dist/jquery.js"></script>
         <script type = "text/javascript" src="/lib/angular/angular.js"></script>
