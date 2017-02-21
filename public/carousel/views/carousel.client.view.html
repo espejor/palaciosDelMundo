@@ -1,6 +1,6 @@
 
-<div ng-controller="SetupController"  data-ng-init="find()" class="">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+<div ng-controller="carouselController"  data-ng-init="find()" class="">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval={{setInterval}}>
         <!-- Indicators -->
         <ol class="carousel-indicators" >
             <li data-target="#myCarousel" data-slide-to={{$index}}  ng-class="{active:!$index}" ng-repeat="slide in setup[0].photosCarousel"></li>

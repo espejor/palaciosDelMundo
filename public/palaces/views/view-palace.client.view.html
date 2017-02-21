@@ -13,7 +13,10 @@
         <rating class = "rating" ng-model=palace.rate max = "5" readonly ="true"></rating>
         <span>  ({{palace.rate | number:2}}) </span>
         <h6><a href = "#listComments" target="_self">Tiene {{palace.comments.length}} comentarios</a></h6>
-        <a  data-ng-show="authentication.user" class= "btn btn-success" href="/#!/comments/create" data-ng-click="newComment(palace._id);">Añadir comentario</a>
+        <!--<a class= "btn btn-success" href="/#!/comments/create" data-ng-click="newComment(palace._id);">Añadir comentario</a>-->
+            <a data-ng-show="authentication.user"  class="btn btn-success" type="button" ng-dialog-class="ngdialog-theme-flat"
+            ng-dialog-close-previous ng-click="newComment(palace._id)">Añadir comentario</a>
+
       </div>
         <div id = "onePalaceMap" class = "panel">
                 <div id = "searchMap" class = "panel ">
@@ -90,12 +93,15 @@
             </div>     
              <div class="containerPhoto">
                  <img class="itemPalace panel photoItemPalace" ng-src="{{palace.picture[0].url}}">
-                 <a class="openMorePhotosButton" href="/#!/palaces/gallery/{{palace._id}}" >Más fotos</a>
-             </div>
+                 <!--<a class="openMorePhotosButton" href="/#!/palaces/gallery/{{palace._id}}" >Más fotos</a>-->
+                <a class="openMorePhotosButton" type="button" ng-dialog-class="ngdialog-theme-flat"
+                ng-dialog-close-previous ng-click="clickToOpen()">Más fotos</a>
+            </div>
         </div>
         <div class = "resena panel">
-        <span><textarea id="resena"  readonly>{{palace.resena}}</textarea></span>
-      </div>
+            <span><textarea id="resena"  readonly>{{palace.resena}}</textarea></span>
+        </div>
+
 
     </div>
 

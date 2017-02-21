@@ -8,11 +8,11 @@ angular.module('palaces')
 	'indexSrvc',
 	'mapBoundSrvc', 'palacesSrvc', 'normalize', 'noPalacesForCountrySrvc', 
 	'viewSearchSrvc', 'listCountriesSelectedSrvc', 'factoryPalaces', 'setNewBoundsSrvc', 'palacesShowedSrvc', '$modal' , 
-	'NgMap','$route', 'factoryOnePalace', 'palaceIdSrvc',
+	'NgMap','$route', 'factoryOnePalace', 'palaceIdSrvc','ngDialog','modalWindow',
 	function ($scope, $routeParams, $location, Authentication, Palaces, PalaceID, Pictures, Upload,
 		indexSrvc, mapBoundSrvc,	
 		palacesSrvc, normalize, noPalacesForCountrySrvc, viewSearchSrvc, listCountriesSelectedSrvc, factoryPalaces,
-		 setNewBoundsSrvc, palacesShowedSrvc, $modal, NgMap, $route, factoryOnePalace,palaceIdSrvc) {
+		 setNewBoundsSrvc, palacesShowedSrvc, $modal, NgMap, $route, factoryOnePalace, palaceIdSrvc, ngDialog,modalWindow) {
 		
 		$scope.palaces = [];
 		$scope.API_KEY = 'AIzaSyC8wzZzLM9fgggkBLsGUSwIFVJgM2YORtg';
@@ -276,6 +276,11 @@ angular.module('palaces')
 
 		$scope.newComment = function (palace_id) {
 			PalaceID._id = palace_id;
+			modalWindow.newComment = ngDialog.open({
+				template: 'comments/views/create-comment.client.view.html', 
+				className: 'ngdialog-theme-default',
+				controller: 'CommentsController',
+			});
 //			$location.path('comments/create');
 		};
 		
@@ -574,5 +579,12 @@ angular.module('palaces')
 			}
 
 		}
+
+		$scope.clickToOpen = function () {
+			var newCommentWindowDialog = ngDialog.open({
+				template: 'palaces/views/gallery-palace.client.view.html', 
+				className: 'ngdialog-theme-default'
+			});
+		};
 	}
 ]);

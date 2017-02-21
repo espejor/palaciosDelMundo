@@ -54,6 +54,10 @@ angular.module('palaces')
 	}])
 
 
+.service('modalWindow', function () {
+	return { newComment : '' };
+})
+
 
   .service('normalize', function () {
 	this.textNormalized = function (texto) {

@@ -26,11 +26,16 @@ body {
 }
 
 .infoInit {
-    padding: 2% 15% 2% 15%;
-    height: 183px;
+    padding: 1% 15% 1% 15%;
+    /*height: 183px;*/
     width: 100%;
     text-align: justify;
     border: none;
+    background-color: lavender;
+    color: black;
+    font-family: serif;
+    font-size: 17px;
+    font-style: italic;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -115,6 +120,7 @@ body {
     object-fit: contain;
     max-width: 100%;
     height: 100%;
+    background-color: silver;
 }
 
 .iconDelete {
@@ -161,6 +167,7 @@ body {
 .resBusqueda{
   margin-right: 0px;
   margin-top: 5px;
+  background-color: beige;
 }
 
 .rating{
@@ -224,12 +231,13 @@ body {
 
 .openMorePhotosButton {
     position: relative;
-    bottom: 3em;
+    bottom: 3.5em;
     left: 1em;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 10px;
     font-size: larger;
+    cursor:pointer; cursor: hand
 }
 
 .closebtn {
@@ -249,8 +257,13 @@ body {
     background-repeat: repeat;
 }
 
+
+#newCommentWindowDialog {
+    background-color: black;
+}
+
 .createCommentModalView {
-    padding-top: 100px  !important;
+    margin-top: 10%;
 }
 
 .headingModalComment {
@@ -414,6 +427,10 @@ h6{
     padding-top:30px;
 }
 
+.w3-modal-content {
+    margin-top: 3%;
+}
+
 .closeGallery {
     position: relative;
     top: 54px;
@@ -479,6 +496,15 @@ h6{
     color: white;
     padding: 40px;
 }
+.ngdialog.ngdialog-theme-default {
+    padding-top: 0;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content  {
+    padding:0em;
+    padding-top: 0;
+    width:60%;
+}
 
 #controls {
 position: relative;
@@ -488,6 +514,8 @@ position: relative;
 }
 .LRcontrol {
     text-decoration:none !important;
+    cursor:pointer; 
+    cursor: hand;
 }
 
 .leftControl {
@@ -564,6 +592,7 @@ div.w3-container {
     margin: 10px;
     width: 31%;
     height: 364px;
+    background-color: whitesmoke;
 }
 
 .filaPalaces {
@@ -592,3 +621,10 @@ span.title {
     margin-left:5px;
 }
 
+.footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    background-color: black;
+    color:white;
+}

@@ -1,6 +1,6 @@
 ﻿
-<section data-ng-controller="PalacesController" class="w3-modal" id ="id01" data-ng-init="findOne()" >
-     <div class="w3-modal-content w3-card-8 w3-animate-zoom" id="modal-window-gallery-palace">
+<section data-ng-controller="PalacesController" class="" id ="id01" data-ng-init="findOne()" >
+     <div class=" w3-card-8 w3-animate-zoom" id="modal-window-gallery-palace">
          <div class="w3-center"> 
        
              <div class="galleryPhoto item-pack-img-gallery w3-card-12 " ng-repeat="picture in palace.picture">
@@ -17,9 +17,11 @@
 
              </div>
              <div id="controls">
-                 <a class="glyphicon glyphicon-circle-arrow-left leftControl LRcontrol" href="/#!/palaces/gallery/{{palace._id}}" ng-click="previousPhoto()"></a>
-                 <a class="glyphicon glyphicon-circle-arrow-right rightControl LRcontrol" href="/#!/palaces/gallery/{{palace._id}}" ng-click="forwrdPhoto()"></a>
-             </div id="controls">         </div>
-          <a href="/#!/palaces/{{palace._id}}" class="closeGallery w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</a>
+                 <a class="glyphicon glyphicon-circle-arrow-left leftControl LRcontrol"  ng-click="previousPhoto()" ></a>
+                 <a class="glyphicon glyphicon-circle-arrow-right rightControl LRcontrol"  ng-click="forwrdPhoto()"></a>
+             </div id="controls">         
+         </div>
+         
       </div>
 </section>
+

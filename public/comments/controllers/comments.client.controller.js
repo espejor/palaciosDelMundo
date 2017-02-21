@@ -2,8 +2,8 @@
 'use strict';
 
 // Crear el controller 'comments'
-angular.module('comments').controller('CommentsController', ['$scope', '$routeParams', '$location', 'Authentication', 'Comments', 'PalaceID','Palaces',
-	function ($scope, $routeParams, $location, Authentication, Comments, PalaceID,Palaces) {
+angular.module('comments').controller('CommentsController', ['$scope', '$routeParams', '$location', 'Authentication', 'Comments', 'PalaceID','Palaces','modalWindow',
+	function ($scope, $routeParams, $location, Authentication, Comments, PalaceID,Palaces,modalWindow) {
 		// Exponer el service Authentication
 		$scope.authentication = Authentication;
 		$scope.palace = PalaceID._id;		
@@ -32,8 +32,8 @@ angular.module('comments').controller('CommentsController', ['$scope', '$routePa
 						res.$update({ rate: res.rate }, function (palace, err) {
 							if (palace) {
 								console.log(palace);
-								// Si un comentario fue creado de modo correcto, redireccionar al usuario a la página del comentario 
-								$location.path('palaces/' + res._id);
+								// Si un comentario fue creado de modo correcto, cerrar la ventana modal
+								modalWindow.newComment.close();
 							} else {
 								console.log(err);
 							}
